@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang='ua'>
-<title>Prosto-Land | Послуги</title>
+<title>Prosto-Land | Home</title>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
-<link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/emojis/1243186309166665758.png"> 
+<link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
 <style>
   * {
       box-sizing: border-box
@@ -11,7 +11,6 @@
   body {
       font-family: 'Open Sans', sans-serif;
       min-height: 100vh;
-      padding: 20px;
       margin: 0;
       background: #1c1515 url(https://www.prosto-land.top/files/bgk.png);
       color: #eee;
@@ -22,7 +21,7 @@
   }
 
   h1 {
-      margin: 5%;
+      margin: 3.5%;
       text-align: center
   }
 
@@ -46,7 +45,7 @@
 
   .container,
   .top-bar {
-      width: 75%;
+      width: 100%;
       max-width: 700px;
       margin: 0 auto
   }
@@ -63,13 +62,13 @@
 
   .top-bar .label:hover {
     background-image: linear-gradient(92.88deg, #5b5b5b 9.16%, #5b5b5b 43.89%, #5b5b5b 64.72%);
-    box-shadow: rgba(255, 255, 255, 0.5) 0 2px 30px;
+    box-shadow: rgba(255, 255, 255, 0.5) 0 2px 20px;
     transition-duration: .1s;
     }
 
     @media (min-width: 768px) {
         .top-bar .label:hover {
-            padding: 0 1.5rem;
+            padding: 0 1rem;
         }
     }
   .top-bar .label a {
@@ -130,8 +129,8 @@
       margin: 10px 0 0 0;
   }
 
+
 .dropdown {
-  margin-bottom: 20px;
   text-align: center
 }
 
@@ -149,8 +148,6 @@ select {
   margin-top: 20px;
   padding: 10px;
   border: 1px solid #ccc;
-  background-color: #333;
-  width: 95%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -164,32 +161,53 @@ select {
 p{
     text-align: center
 }
+
 </style>
 <body>
-
+  <div class="top-bar">  
+    <div class="label">
+      <a href="../">Home</a>
+    </div>
+    <div class="label">
+      <a href="../vote">Голосувати за нас</a>
+    </div>    
+    <div class="label">
+      <a href="../discord" target="_blank">Діскорд</a>
+    </div>
+    <div class="label">
+           <a href="../donat">Донат</a>
+    </div>
+    <div class="label">
+           <a href="../rules">Правила</a>
+    </div>
+    <div class="label">
+        <a href="../guides">Гайди</a>
+    </div>
+  </div>
   <div class="container">
-   <h1>Список Послуг</h1>
-
-   <div class="dropdown">
-    <label for="item-select">Виберіть донат:</label>
-    <select id="item-select" onchange="showDescription()">
-      <option value="default" hidden>Оберіть</option>
-      <option value="item1">Гравець</option>
-      <option value="item2">Сержант</option>
-      <option value="item3">Майор</option>
-      <option value="item4">Генерал</option>
-      <option value="item5">Спонсор</option>
-    </select>
+    <h1>Список Послуг</h1>
+ 
+    <div class="dropdown">
+     <label for="item-select">Виберіть донат:</label>
+     <select id="item-select" onchange="showDescription()">
+       <option value="default" hidden>Оберіть</option>
+       <option value="item1">Гравець</option>
+       <option value="item2">Сержант</option>
+       <option value="item3">Майор</option>
+       <option value="item4">Генерал</option>
+       <option value="item5">Спонсор</option>
+     </select>
+   </div>
+ 
+   <div class="description">
+     <p id="item-description">Окрім Донатів на сервері присутні додатові послуги такі як:<br> <br>Донат валюта <br>Зірочка✬ - це донат-валюта, яку можна купити за реальні гроші, та купувати дорогоцінні предмети у донат магазині <br>За кожні 100 зірочок ви заплатите 10 грн.<br> <br> Кейси <br>1. Донат кейс 50 Грн/1 шт <br>2. Кейс із речами 25 Грн/1 шт</p>
+   </div>
+ 
+   <a class="btn" target="_blank" href="https://discord.com/users/814584250535379004">
+     Купити послугу в засновника.
+     </a>
+ 
   </div>
-
-  <div class="description">
-    <p id="item-description">Окрім Донатів на сервері присутні додатові послуги такі як:<br> <br>Донат валюта <br>Зірочка✬ - це донат-валюта, яку можна купити за реальні гроші, та купувати дорогоцінні предмети у донат магазині <br>За кожні 100 зірочок ви заплатите 10 грн.<br> <br> Кейси <br>1. Донат кейс 50 Грн/1 шт <br>2. Кейс із речами 25 Грн/1 шт</p>
-  </div>
-
-  <a class="btn" target="_blank" href="https://discord.com/users/814584250535379004">
-    Купити послугу в засновника.
-    </a>
-
-  <script src="https://www.prosto-land.top/files/script.js"></script>
-  </div>
-</body></html>
+<script src="https://www.prosto-land.top/files/script.js"></script>
+</body>
+</html>
