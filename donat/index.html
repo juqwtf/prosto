@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-<title>Prosto-Land | Донат</title>
+<html lang='ua'>
+<title>Prosto-Land | Home</title>
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
 <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
 <style>
@@ -20,17 +20,11 @@
       justify-content: center
   }
 
-  h3 {
-      margin: 0;
-      padding: 20px;
-      text-align: left
+  h1 {
+      margin: 3.5%;
+      text-align: center
   }
 
-  h4 {
-      margin: 0;
-      padding: 15px;
-      text-align: left
-  }
   a {
       text-decoration: none;
       color: #0c75ff;
@@ -39,6 +33,14 @@
 
   a:hover {
       text-decoration: underline
+  }
+
+  img {
+      max-width: 100%
+  }
+
+  iframe {
+      margin-left: 4px
   }
 
   .container,
@@ -90,7 +92,7 @@
       border: #414141;
       text-decoration: none;
       text-align: center;
-      font-size: 16px;
+      font-size: 20px;
       cursor: pointer;
       transition: all .3s ease-in-out
   }
@@ -100,18 +102,66 @@
       letter-spacing: 1px
   }
 
+
   .btn:hover {
     background-image: linear-gradient(92.88deg, #545454 9.16%, #545454 43.89%, #545454 64.72%);
-    box-shadow: rgba(255, 255, 255, 0.5) 0 2px 20px;
+    box-shadow: rgba(255, 255, 255, 0.5) 0 2px 30px;
     transition-duration: .1s;
     
     }
+
+
+  ul {
+      font-size: .9em
+  }
+
+  ul li {
+      margin-bottom: 10px
+  }
+
+  b {
+      color: #1fd0cd
+  }
 
   .small {
       font-size: 14px;
       text-align: center;
       margin: 10px 0 0 0;
   }
+
+
+.dropdown {
+  text-align: center
+}
+
+
+select {
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  color: #fff; 
+  background-color: #333;
+}
+
+.description {
+  font-size: 18px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#item-description {
+  margin: 0;
+  color: white;
+  white-space: pre-wrap
+}
+
+p{
+    text-align: center
+}
+
 </style>
 <body>
   <div class="top-bar">  
@@ -133,68 +183,31 @@
     <div class="label">
         <a href="../guides">Гайди</a>
     </div>
-    </div>
   </div>
   <div class="container">
-    <h2>Привілегії</h2>
-    <h3>1.Гравець (Безкоштовно)</h3>
-    1. 1 приватів /rg<br>
-    2. 1 точка дому  /sethome<br>
-    3. 5 речей на аукціоні /ah sell<br>
-    4. Стати в афк /afk<br>
-    5. Кіт старт (Кожні 24 год) /kit start<br>
-    6. Використовування стандартних команд<br>
-    <h3>2.Сержант (25 Грн)</h3>
-    1. 2 приватів /rg<br>
-    2. 2 точки дому /sethome<br>
-    3. 5 речей на аукціоні /ah sell<br>
-    4. Верстак /wb або /workbench<br>
-    5. Кіт Сержанта (Кожні 7д) /kit sergant<br>
-    6. Одіти на голову /hat<br>
-    7. Всі права минулих донатів<br>
-    
-    <h3>3.Майор (50 Грн)</h3>
-    1. 3 приватів /rg<br>
-    2. 5 точок дому /sethome<br>
-    3. 10 речей на аукціоні /ah sell<br>
-    4. Повернутися назад /back<br>
-    5. Кіт Майора (Кожні 7д) /kit mayor<br>
-    6. Ендер сундук /ec<br>
-    7. Відновити голод /feed<br>
-    8. Всі права минулих донатів<br>
-    
-    <h3>4.Генерал (100 Грн)</h3>
-    1. 5 приватів /rg<br>
-    2. 10 точок дому /sethome<br>
-    3. 15 речей на аукціоні /ah sell<br>
-    4. Подивитися інвентар /invsee<br>
-    5. Кіт Генерал (Кожні 7д) /kit general<br>
-    6. Політ /fly<br>
-    7. Починити річ /repair<br>
-    8. Відновити здоров'я /heal<br>
-    9. Всі права минулих донатів<br>
-
-    
-    <h3>5.Спонсор (200 Грн)</h3>
-    1. 10 приватів /rg<br>
-    2. 15 точок дому /sethome<br>
-    3. 25 речей на аукціоні /ah sell<br>
-    4. Заміну часу для себе /ptime<br>
-    5. Кіт Спонсор (Кожні 7д) /kit sponsor<br>
-    6. Заміна нікнейма(фейк) /nick<br>
-    7. Подивитися хто рядом /near<br>
-    8. Зміну погоди /weather<br>
-    9. Віртуальна наковальня /anvil<br>
-    10. Всі права минулих донатів<br>
-    <br>
-    <h3>Донат валюта</h3>
-    Зірочка✬ - це донат-валюта, яку можна купити за реальні гроші, і купувати дорогоцінні предмети у донат магазині<br>
-    За кожні 100 зірочок ви заплатите 15 грн.<br>
-    <h3>Кейси</h3>
-    1. Донат кейс 50 Грн/1 шт<br>
-    2. Кейс із речами 25 Грн/1 шт
-    <a class="btn" target="_blank" href="https://discord.com/users/814584250535379004">
-      Купити донат у засновника.
-    </a>
+    <h1>Список Послуг</h1>
+ 
+    <div class="dropdown">
+     <label for="item-select">Виберіть донат:</label>
+     <select id="item-select" onchange="showDescription()">
+       <option value="default" hidden>Оберіть</option>
+       <option value="item1">Гравець</option>
+       <option value="item2">Сержант</option>
+       <option value="item3">Майор</option>
+       <option value="item4">Генерал</option>
+       <option value="item5">Спонсор</option>
+     </select>
+   </div>
+ 
+   <div class="description">
+     <p id="item-description">Окрім Донатів на сервері присутні додатові послуги такі як:<br> <br>Донат валюта <br>Зірочка✬ - це донат-валюта, яку можна купити за реальні гроші, та купувати дорогоцінні предмети у донат магазині <br>За кожні 100 зірочок ви заплатите 10 грн.<br> <br> Кейси <br>1. Донат кейс 50 Грн/1 шт <br>2. Кейс із речами 25 Грн/1 шт</p>
+   </div>
+ 
+   <a class="btn" target="_blank" href="https://discord.com/users/814584250535379004">
+     Купити послугу в засновника.
+     </a>
+ 
   </div>
-</body></html>
+<script src="https://www.prosto-land.top/files/script.js"></script>
+</body>
+</html>
