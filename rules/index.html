@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prosto-Land | Правила</title>
+    <meta name="description" content="Загальні правила поведінки на сервері Prosto-Land. Ознайомтеся з правилами, щоб уникнути покарань.">
+    <meta name="keywords" content="Minecraft, сервер, правила, Prosto-Land, чат, поведінка">
+    <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+    <style>
+        :root {
+            --primary-bg: #1c1515;
+            --container-bg: rgba(51, 51, 51, 0.85); 
+            --text-color: #eee;
+            --highlight-color: #1fd0cd;
+            --button-bg: #414141;
+            --button-hover-bg: #545454;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --hover-shadow-color: rgba(31, 208, 205, 0.3); 
+            --punishment-color: #aaa; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            min-height: 100vh;
+            background: var(--primary-bg) url(https://www.prosto-land.top/files/bgk.png) no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; 
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        header {
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+            height: 50px;
+        }
+
+        .top-bar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap; 
+        }
+
+        .top-bar-nav a {
+            display: block;
+            padding: 12px 18px;
+            background-image: linear-gradient(92.88deg, var(--button-bg) 9.16%, var(--button-bg) 43.89%, var(--button-bg) 64.72%);
+            color: #ccc;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all .3s ease-in-out;
+            white-space: nowrap;
+        }
+
+        .top-bar-nav a:hover {
+            background-image: linear-gradient(92.88deg, var(--button-hover-bg) 9.16%, var(--button-hover-bg) 43.89%, var(--button-hover-bg) 64.72%);
+            box-shadow: var(--hover-shadow-color) 0 2px 20px;
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        .menu-toggle, .close-menu-btn {
+            display: none;
+        }
+
+        main.container {
+            background-color: var(--container-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 40px 25px; 
+            box-shadow: 3px 3px 8px 2px var(--shadow-color);
+            border-radius: 10px;
+            text-align: left; 
+            z-index: 1;
+            margin-bottom: 20px; 
+        }
+
+        main.container h1 {
+            text-align: center;
+            margin-bottom: 30px; 
+            font-size: 2.2em; 
+            color: #fff;
+        }
+        
+        .rules-section {
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            /* overflow: hidden; - Не потрібен без анімації */
+        }
+
+        .rules-section summary {
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 15px;
+            background-color: var(--button-bg);
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.2s;
+            position: relative; 
+            list-style: none; 
+        }
+        
+        .rules-section summary:hover {
+            background-color: var(--button-hover-bg);
+        }
+        
+        .rules-section summary::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.4em;
+            /* transition: transform 0.3s ease-in-out; - Не потрібен без анімації */
+        }
+
+        .rules-section[open] summary::after {
+             transform: translateY(-50%) rotate(45deg);
+        }
+
+        .rules-section .rules-content {
+            padding: 15px; 
+            line-height: 1.7;
+            font-size: 1em; 
+            border-top: 1px solid #444;
+            /* Властивості анімації видалено */
+        }
+
+        .rules-section ol {
+            padding-left: 25px; 
+            margin-top: 10px;
+        }
+
+        .rules-section li {
+            margin-bottom: 12px; 
+        }
+
+        .punishment {
+            font-style: italic;
+            color: var(--punishment-color);
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+
+        .rules-warning {
+            margin-top: 25px; 
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            white-space: nowrap; 
+            color: #ffcc00; 
+        }
+
+        footer {
+            margin-top: 0; 
+            font-size: 0.75em; 
+            text-align: center;
+            color: #ccc; 
+            z-index: 1;
+            max-width: 850px;
+            width: 100%;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+        
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 820px) {
+             main.container {
+                padding: 30px 15px; 
+            }
+            
+            .rules-warning {
+                white-space: normal;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--button-bg);
+                border: none;
+                cursor: pointer;
+                padding: 10px;
+                border-radius: 8px;
+                z-index: 20;
+            }
+
+            .menu-toggle .bar {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background-color: var(--text-color);
+                margin: 5px auto;
+            }
+
+            .top-bar-nav {
+                display: none;
+            }
+
+            .top-bar-nav.is-active {
+                display: flex;
+                flex-direction: column; 
+                justify-content: center;
+                align-items: center; 
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(28, 21, 21, 0.9);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                z-index: 15;
+                padding: 60px 20px 20px 20px; 
+                gap: 12px; 
+                overflow-y: auto; 
+            }
+
+            .top-bar-nav.is-active a {
+                padding: 15px; 
+                margin: 0;
+                font-size: 1.2em; 
+                text-align: center;
+                width: 90%; 
+                max-width: 400px; 
+                min-width: auto;
+            }
+
+            .top-bar-nav.is-active .close-menu-btn {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 2.5em;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            body.menu-open {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="container">
+    <button class="menu-toggle" id="menu-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    <nav class="top-bar-nav" id="nav-links">
+        <button class="close-menu-btn" id="close-menu-btn">&times;</button>
+        <a href="/">Головна</a>
+        <a href="/vote">Голосувати</a>
+        <a href="/discord" target="_blank">Діскорд</a>
+        <a href="/donat">Донат</a>
+        <a href="/rules">Правила</a>
+        <a href="/guides">Гайди</a>
+        <a href="/map" target="_blank">Карта</a>
+        <a href="/status" target="_blank">Статус</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h1>Правила Сервера</h1>
+
+    <details class="rules-section">
+        <summary>1. Правила реєстрації та використання акаунтів</summary>
+        <div class="rules-content">
+            <ol>
+                <li> Забороняється реєстрація акаунтів з невідповідним нікнеймом <span class="punishment">Бан (назавжди)</span></li>
+                <li> Забороняється реєстрація акаунта з націленим заподіяням шкоди серверу, гравцям <span class="punishment">Бан (назавжди)</span></li>
+                <li> Забороняються мультиаккаунти у будь якому прояві <span class="punishment">Бан (назавжди)</span></li>
+                <li> Забороняється передавати акаунт з будь-яким статусом стороннім особам <span class="punishment">Бан (назавжди)</span></li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="rules-section">
+        <summary>2. Загальні правила використання чату</summary>
+        <div class="rules-content">
+            <ol>
+                <li> Забороняється Флуд, флуд-символи, однакові повідомлення <span class="punishment">Мут (від 1 год до назавжди)</span></li>
+                <li> Забороняється кібербулінг, перехід на особистості, злив особистих даних гравців <span class="punishment">Мут (від 1 год до назавжди)</span></li>
+                <li> Забороняються дискримінаційні жарти чи ворожі висловлювання та пропаганда <span class="punishment">Мут (від 1 год до назавжди)</span></li>
+                <li> Забороняється провокувати конфлікт, торкання спірних ситуацій, пов'язаних з політикою, релігією та іншими темами(окрім цькування русських) <span class="punishment">Мут (від 1 год до назавжди)</span></li>
+                <li> Забороняється неадекватна поведінка, яка є неприємною для гравців на сервері <span class="punishment">Мут (від 1 год до 24 год)</span></li>
+                <li> Забороняється поширювати посилання на сторонні ресурси, які не належать проекту <span class="punishment">Мут (назавжди)</span></li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="rules-section">
+        <summary>3. Загальні правила поведінки на сервері</summary>
+        <div class="rules-content">
+            <ol>
+                <li> Забороняється отримувати перевагу над гравцями нечесним шляхом <span class="punishment">Бан (від 3 до 30 дн)</span></li>
+                <li> Використання сторонніх модифікацій, програм, багів є порушенням <span class="punishment">Бан (від 3 до 30 дн)</span></li>
+                <li> Забороняється створювати і використовувати споруди/речі/скіни нецензурного характеру <span class="punishment">Бан (назавжди)</span></li>
+                <li> Забороняється замовчувати про порушників, читерів, багоюзерів <span class="punishment">Бан (назавжди)</span></li>
+                <li> Забороняється отримання статистики нечесним шляхом <span class="punishment">Бан (від 3 до 14 дн)</span></li>
+                <li> Забороняється вводити адміністрацію в оману/обманювати/брехати <span class="punishment">Бан (від 3 до 14 дн)</span></li>
+                <li> Забороняється створювати механізми, що викликають лаги або збої на сервері <span class="punishment">Бан (попередження)</span></li>
+            </ol>
+        </div>
+    </details>
+
+    <details class="rules-section">
+        <summary>Також ви можете/маєте:</summary>
+        <div class="rules-content">
+            <ol>
+                <li> Право подати скаргу на адміністрацію, якщо вважаєте її поведінку неправильною</li>
+                <li> Право оскаржити своє покарання, якщо на момент скарги не минула половина терміну покарання</li>
+                <li> Вимагати виправлення багів і компенсацію, якщо вони принесли Вам шкоду, за наявності доказів</li>
+            </ol>
+        </div>
+    </details>
+
+    <p class="rules-warning">⚠️ Правила можуть бути змінені у будь-який час без додаткових зобов'язань повідомляти. ⚠️</p>
+
+</main>
+
+<footer>
+    <p>&copy; 2022-2025 Prosto-Land. Всі права захищено.</p>
+    <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
+</footer>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const body = document.body;
+
+    function toggleMenu(show) {
+        navLinks.classList.toggle('is-active', show);
+        body.classList.toggle('menu-open', show);
+        menuToggle.style.display = show ? 'none' : 'block';
+    }
+
+    menuToggle.addEventListener('click', () => toggleMenu(true));
+    closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+</script>
+
+</body>
+</html>
