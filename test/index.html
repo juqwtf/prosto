@@ -115,6 +115,28 @@
             background: #555; cursor: not-allowed; transform: none; box-shadow: none; color: #aaa;
         }
 
+        /* Стилі для блоку підтримки */
+        .support-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .support-title {
+            font-size: 0.9em; color: #aaa; margin-bottom: 10px;
+        }
+        .support-links {
+            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;
+        }
+        .support-btn {
+            display: inline-block; padding: 8px 15px;
+            font-size: 0.85em; color: #fff; text-decoration: none;
+            border-radius: 6px; transition: background 0.2s;
+            background-color: #333; border: 1px solid #555;
+        }
+        .support-btn.telegram:hover { background-color: #0088cc; border-color: #0088cc; }
+        .support-btn.discord:hover { background-color: #5865F2; border-color: #5865F2; }
+
+
         footer {
             margin-top: 0; font-size: 0.75em; text-align: center;
             color: #ccc; z-index: 1; max-width: 850px; width: 100%;
@@ -200,8 +222,6 @@
             <option value="item5" data-price="200">Спонсор (200 грн)</option>
 
             <option disabled>--------------------------------</option>
-            <option disabled>⬇️ КЕЙСИ ⬇️</option>
-            
             <option value="case1" data-price="50">Донат кейс (50 грн)</option>
             <option value="case2" data-price="25">Кейс із речами (25 грн)</option>
         </select>
@@ -216,7 +236,13 @@
 
     <button id="buy-btn" class="buy-btn" onclick="openPaymentModal()" disabled>Оплатити</button>
 
-    <a class="btn" style="display:inline-block; margin-top: 10px; color:#aaa; text-decoration:underline; font-size:0.9em;" target="_blank" href="https://discord.com/users/814584250535379004">Купити послугу у засновника (вручну)</a>
+    <div class="support-section">
+        <div class="support-title">Не прийшов донат? Зверніться до підтримки:</div>
+        <div class="support-links">
+            <a class="support-btn telegram" href="https://t.me/juqwtf" target="_blank">Telegram</a>
+            <a class="support-btn discord" href="https://discord.com/users/814584250535379004" target="_blank">Discord</a>
+        </div>
+    </div>
 </main>
 
 <footer>
