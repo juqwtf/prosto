@@ -100,6 +100,41 @@
         .warnings p { margin: 0 0 5px 0; }
         .warnings p:last-child { margin-bottom: 0; }
 
+        .checkbox-group {
+            text-align: left; margin: 20px 0; padding: 15px;
+            background: rgba(0, 0, 0, 0.2); border-radius: 8px;
+            border: 1px solid #444;
+        }
+        .checkbox-item {
+            display: flex; align-items: flex-start; margin-bottom: 12px;
+            cursor: pointer; position: relative;
+        }
+        .checkbox-item:last-child { margin-bottom: 0; }
+        
+        .checkbox-item input[type="checkbox"] {
+            appearance: none; -webkit-appearance: none;
+            min-width: 22px; height: 22px;
+            background-color: #2b2b2b; border: 1px solid #555;
+            border-radius: 4px; margin-right: 12px; cursor: pointer;
+            position: relative; margin-top: 0;
+            transition: all 0.2s;
+        }
+        .checkbox-item input[type="checkbox"]:checked {
+            background-color: var(--highlight-color);
+            border-color: var(--highlight-color);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked::after {
+            content: '✔'; position: absolute; color: #000;
+            font-size: 16px; left: 4px; top: -1px; font-weight: bold;
+        }
+        .checkbox-item label {
+            color: #ccc; font-size: 0.95em; cursor: pointer;
+            line-height: 1.4; user-select: none;
+        }
+        .checkbox-item:hover label { color: #fff; }
+        .checkbox-item:hover input { border-color: #888; }
+
         .buy-btn {
             display: inline-block; width: 100%; padding: 15px 20px; margin-top: 25px;
             color: #ffffff; background-image: linear-gradient(45deg, var(--highlight-color) 0%, #1a9a98 100%);
@@ -115,7 +150,6 @@
             background: #555; cursor: not-allowed; transform: none; box-shadow: none; color: #aaa;
         }
 
-        /* Кнопка виклику підтримки */
         .support-trigger-btn {
             display: inline-block; margin-top: 20px; 
             color: #aaa; text-decoration: underline; cursor: pointer;
@@ -131,7 +165,6 @@
         }
         footer p { margin-bottom: 5px; }
 
-        /* --- ЗАГАЛЬНІ СТИЛІ ДЛЯ MODAL --- */
         .modal {
             display: none; position: fixed; z-index: 100; left: 0; top: 0;
             width: 100%; height: 100%; overflow: auto;
@@ -147,7 +180,6 @@
         .close-modal:hover { color: #fff; }
         .modal h2 { color: var(--highlight-color); margin-bottom: 20px; }
         
-        /* Стилі для модального вікна оплати */
         .modal-step { margin-bottom: 20px; text-align: left; border-bottom: 1px solid #444; padding-bottom: 15px; }
         .modal-step:last-child { border-bottom: none; }
         .highlight-text { color: #ffeb3b; font-weight: bold; font-size: 1.1em; }
@@ -159,7 +191,6 @@
         }
         .mono-btn:hover { background-color: #333; }
 
-        /* Стилі для модального вікна підтримки */
         .support-options {
             display: flex; flex-direction: column; gap: 15px; margin-top: 20px;
         }
@@ -231,7 +262,17 @@
 
     <div class="warnings">
         <p>❗Вводьте нікнейм уважно! Донат видається автоматично за ніком.</p>
-        <p>❗Донат купується ТІЛЬКИ за вашою ініціативою, кошти не повертаються.</p>
+    </div>
+
+    <div class="checkbox-group">
+        <div class="checkbox-item" onclick="toggleCheckbox('check-played')">
+            <input type="checkbox" id="check-played" onchange="validateForm()">
+            <label for="check-played">Я підтверджую, що цей нікнейм хоча б раз заходив на сервер.</label>
+        </div>
+        <div class="checkbox-item" onclick="toggleCheckbox('check-refund')">
+            <input type="checkbox" id="check-refund" onchange="validateForm()">
+            <label for="check-refund">Я розумію, що кошти не повертаються (добровільна пожертва).</label>
+        </div>
     </div>
 
     <button id="buy-btn" class="buy-btn" onclick="openPaymentModal()" disabled>Оплатити</button>
@@ -317,14 +358,33 @@
         validateForm();
     }
 
+    function toggleCheckbox(id) {
+        if (event.target.type === 'checkbox') return;
+        const checkbox = document.getElementById(id);
+        checkbox.checked = !checkbox.checked;
+        validateForm();
+    }
+
     function validateForm() {
         const hasNickname = nicknameInput.value.trim().length > 0;
         const selectedOption = select.options[select.selectedIndex];
         const price = selectedOption.getAttribute('data-price');
+        
+        const isPlayedChecked = document.getElementById('check-played').checked;
+        const isRefundChecked = document.getElementById('check-refund').checked;
+        const allRulesAccepted = isPlayedChecked && isRefundChecked;
 
         if (price && parseFloat(price) > 0) {
-            buyBtn.disabled = !hasNickname;
-            buyBtn.textContent = hasNickname ? `Оплатити ${price} грн` : "Введіть нікнейм";
+            buyBtn.disabled = !(hasNickname && allRulesAccepted);
+            
+            if (!hasNickname) {
+                buyBtn.textContent = "Введіть нікнейм";
+            } else if (!allRulesAccepted) {
+                buyBtn.textContent = "Підтвердіть умови вище";
+            } else {
+                buyBtn.textContent = `Оплатити ${price} грн`;
+            }
+            
             buyBtn.style.display = 'inline-block';
         } else if (price && parseFloat(price) === 0) {
              buyBtn.disabled = true;
@@ -338,7 +398,6 @@
     nicknameInput.addEventListener('input', validateForm);
     handleSelectChange(); 
 
-    // Функції для модальних вікон
     function openPaymentModal() {
         const nickname = nicknameInput.value.trim();
         const selectedOption = select.options[select.selectedIndex];
