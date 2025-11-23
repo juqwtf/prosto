@@ -101,8 +101,8 @@
         .warnings p:last-child { margin-bottom: 0; }
 
         .checkbox-group {
-            text-align: left; margin: 20px 0; padding: 15px;
-            background: rgba(0, 0, 0, 0.2); border-radius: 8px;
+            text-align: left; margin: 15px 0; padding: 15px;
+            background: rgba(0, 0, 0, 0.3); border-radius: 8px;
             border: 1px solid #444;
         }
         .checkbox-item {
@@ -118,18 +118,18 @@
             border-radius: 4px; margin-right: 12px; cursor: pointer;
             position: relative; margin-top: 0;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
         .checkbox-item input[type="checkbox"]:checked {
             background-color: var(--highlight-color);
             border-color: var(--highlight-color);
         }
-
         .checkbox-item input[type="checkbox"]:checked::after {
             content: '✔'; position: absolute; color: #000;
             font-size: 16px; left: 4px; top: -1px; font-weight: bold;
         }
         .checkbox-item label {
-            color: #ccc; font-size: 0.95em; cursor: pointer;
+            color: #ccc; font-size: 0.9em; cursor: pointer;
             line-height: 1.4; user-select: none;
         }
         .checkbox-item:hover label { color: #fff; }
@@ -171,7 +171,7 @@
             background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: #222; margin: 10% auto; padding: 30px;
+            background-color: #222; margin: 5% auto; padding: 30px;
             border: 1px solid var(--highlight-color); border-radius: 12px;
             width: 90%; max-width: 500px; text-align: center; position: relative;
             box-shadow: 0 0 20px rgba(31, 208, 205, 0.2);
@@ -183,13 +183,22 @@
         .modal-step { margin-bottom: 20px; text-align: left; border-bottom: 1px solid #444; padding-bottom: 15px; }
         .modal-step:last-child { border-bottom: none; }
         .highlight-text { color: #ffeb3b; font-weight: bold; font-size: 1.1em; }
+        
         .mono-btn {
             display: block; width: 100%; padding: 12px; margin-top: 10px;
             background-color: #000; color: #fff; text-decoration: none;
             border-radius: 8px; font-weight: bold; border: 2px solid #fff;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
         .mono-btn:hover { background-color: #333; }
+
+        .disabled-link {
+            pointer-events: none;
+            opacity: 0.5;
+            background-color: #222;
+            border-color: #555;
+            color: #888;
+        }
 
         .support-options {
             display: flex; flex-direction: column; gap: 15px; margin-top: 20px;
@@ -264,17 +273,6 @@
         <p>❗Вводьте нікнейм уважно! Донат видається автоматично за ніком.</p>
     </div>
 
-    <div class="checkbox-group">
-        <div class="checkbox-item" onclick="toggleCheckbox('check-played')">
-            <input type="checkbox" id="check-played" onchange="validateForm()">
-            <label for="check-played">Я підтверджую, що цей нікнейм хоча б раз заходив на сервер.</label>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox('check-refund')">
-            <input type="checkbox" id="check-refund" onchange="validateForm()">
-            <label for="check-refund">Я розумію, що кошти не повертаються (добровільна пожертва).</label>
-        </div>
-    </div>
-
     <button id="buy-btn" class="buy-btn" onclick="openPaymentModal()" disabled>Оплатити</button>
 
     <button class="support-trigger-btn" onclick="openSupportModal()">Не прийшов донат? Зверніться до підтримки</button>
@@ -296,9 +294,20 @@
             <p style="font-size:0.8em; color:#aaa;">(Сплатіть ТОЧНО цю суму)</p>
         </div>
 
-        <div class="modal-step">
+        <div class="checkbox-group">
+            <div class="checkbox-item" onclick="toggleCheckbox('check-played')">
+                <input type="checkbox" id="check-played" onchange="validateModal()">
+                <label for="check-played">Я підтверджую, що цей нікнейм хоча б раз заходив на сервер.</label>
+            </div>
+            <div class="checkbox-item" onclick="toggleCheckbox('check-refund')">
+                <input type="checkbox" id="check-refund" onchange="validateModal()">
+                <label for="check-refund">Я розумію, що кошти не повертаються (добровільна пожертва).</label>
+            </div>
+        </div>
+
+        <div class="modal-step" style="border-bottom: none;">
             <p>2. Натисніть кнопку нижче, щоб відкрити Банку:</p>
-            <a id="mono-link" href="#" target="_blank" class="mono-btn">Перейти до оплати Monobank</a>
+            <a id="mono-link" href="#" target="_blank" class="mono-btn disabled-link">Перейти до оплати Monobank</a>
         </div>
         
         <p style="font-size: 0.8em; color: #aaa; margin-top: 15px;">
@@ -315,6 +324,7 @@
         
         <div class="support-options">
             <a href="https://t.me/juqwtf" target="_blank" class="support-link telegram-bg">Telegram</a>
+            <a href="https://discord.com/users/814584250535379004" target="_blank" class="support-link discord-bg">Discord</a>
         </div>
     </div>
 </div>
@@ -350,6 +360,7 @@
     const buyBtn = document.getElementById("buy-btn");
     const paymentModal = document.getElementById("paymentModal");
     const supportModal = document.getElementById("supportModal");
+    const monoLink = document.getElementById('mono-link');
 
     function handleSelectChange() {
         const selectedValue = select.value;
@@ -361,7 +372,7 @@
         if (event.target.type === 'checkbox') return;
         const checkbox = document.getElementById(id);
         checkbox.checked = !checkbox.checked;
-        validateForm();
+        validateModal(); 
     }
 
     function validateForm() {
@@ -369,21 +380,9 @@
         const selectedOption = select.options[select.selectedIndex];
         const price = selectedOption.getAttribute('data-price');
         
-        const isPlayedChecked = document.getElementById('check-played').checked;
-        const isRefundChecked = document.getElementById('check-refund').checked;
-        const allRulesAccepted = isPlayedChecked && isRefundChecked;
-
         if (price && parseFloat(price) > 0) {
-            buyBtn.disabled = !(hasNickname && allRulesAccepted);
-            
-            if (!hasNickname) {
-                buyBtn.textContent = "Введіть нікнейм";
-            } else if (!allRulesAccepted) {
-                buyBtn.textContent = "Підтвердіть умови вище";
-            } else {
-                buyBtn.textContent = `Оплатити ${price} грн`;
-            }
-            
+            buyBtn.disabled = !hasNickname;
+            buyBtn.textContent = hasNickname ? `Оплатити ${price} грн` : "Введіть нікнейм";
             buyBtn.style.display = 'inline-block';
         } else if (price && parseFloat(price) === 0) {
              buyBtn.disabled = true;
@@ -391,6 +390,19 @@
         } else {
             buyBtn.disabled = true;
             buyBtn.textContent = "Оплатити";
+        }
+    }
+
+    function validateModal() {
+        const isPlayedChecked = document.getElementById('check-played').checked;
+        const isRefundChecked = document.getElementById('check-refund').checked;
+        
+        if (isPlayedChecked && isRefundChecked) {
+            monoLink.classList.remove('disabled-link');
+            monoLink.textContent = "Перейти до оплати Monobank";
+        } else {
+            monoLink.classList.add('disabled-link');
+            monoLink.textContent = "Підтвердіть умови вище";
         }
     }
 
@@ -404,10 +416,14 @@
         
         if (!nickname || !price) return;
 
+        document.getElementById('check-played').checked = false;
+        document.getElementById('check-refund').checked = false;
+        validateModal(); 
+
         document.getElementById('modal-price').textContent = price;
         const jarBaseUrl = "https://send.monobank.ua/jar/4RVE8PpJb5";
         const finalLink = `${jarBaseUrl}?t=${encodeURIComponent(nickname)}&a=${price}`;
-        document.getElementById('mono-link').href = finalLink;
+        monoLink.href = finalLink;
         
         paymentModal.style.display = "block";
     }
