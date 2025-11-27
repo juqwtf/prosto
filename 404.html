@@ -251,7 +251,7 @@
 </main>
     
 <footer>
-    <p> 2022-2025 Prosto-Land. Всі права захищено.</p>
+    <p> 2022-<span id="year"></span> Prosto-Land. Всі права захищено.</p>
     <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
 </footer>
 
@@ -269,6 +269,10 @@
 
     menuToggle.addEventListener('click', () => toggleMenu(true));
     closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('year').textContent = new Date().getFullYear();
+    });
 </script>
 
 </body>
