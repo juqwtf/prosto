@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prosto-Land | Гайди</title>
     <meta name="description" content="Корисні гайди та інструкції для гравців сервера Prosto-Land: безпека, приват, роботи, аукціон та інше.">
-    <meta name="keywords" content="Minecraft, сервер, гайди, Prosto-Land, інструкції, як приватити, роботи, аукціон">
+    <meta name="keywords" content="Minecraft, сервер, гайди, Prosto-Land, інструкція, як приватити, роботи, аукціон">
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
@@ -253,7 +253,7 @@
 </main>
 
 <footer>
-    <p>&copy; 2022-2025 Prosto-Land. Всі права захищено.</p>
+    <p> 2022-<span id="year"></span> Prosto-Land.</p>
     <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
 </footer>
 
@@ -271,6 +271,10 @@
 
     menuToggle.addEventListener('click', () => toggleMenu(true));
     closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('year').textContent = new Date().getFullYear();
+    });
 </script>
 
 </body>
