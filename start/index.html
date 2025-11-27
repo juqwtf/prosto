@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosto-Land | Як грати на сервері?</title>
-    <meta name="description" content="Інструкція як почати грати на сервері Prosto-Land. IP адреса сервера та необхідна версія Minecraft.">
-    <meta name="keywords" content="Minecraft, сервер, як грати, IP, Prosto-Land, інструкція, версія">
+    <title>Prosto-Land | Проголосувати за сервер</title>
+    <meta name="description" content="Проголосуйте за сервер Prosto-Land на найкращих моніторингах Minecraft та отримайте нагороди в грі.">
+    <meta name="keywords" content="Minecraft, сервер, голосування, Prosto-Land, моніторинг, mc-servera, hotmc">
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
@@ -86,16 +86,17 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 40px 25px; 
+            padding: 25px 25px; 
             box-shadow: 3px 3px 8px 2px var(--shadow-color);
             border-radius: 10px;
             text-align: center;
             z-index: 1;
+            max-width: 800px; 
         }
 
         main h1 {
             font-size: 2.5em;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             color: #fff;
             font-weight: 700;
         }
@@ -111,36 +112,9 @@
         main b {
             color: var(--highlight-color);
         }
-        
-        .instructions-list {
-            text-align: left;
-            display: inline-block;
-            margin: 0 auto;
-            max-width: 500px; 
-            font-size: 1.1em;
-            line-height: 1.8;
-            padding-left: 20px;
-        }
-        
-        .instructions-list b {
-            color: var(--highlight-color);
-        }
-
-        .instructions-list b#ip-address {
-            cursor: pointer;
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            transition: color 0.2s ease;
-        }
-        .instructions-list b#ip-address:hover {
-            color: #fff;
-        }
 
         .btn {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: fit-content;
+            display: inline-block;
             padding: 15px 30px;
             margin-top: 30px;
             color: #ffffff;
@@ -161,8 +135,45 @@
             letter-spacing: 1px;
         }
 
+        main h2 {
+            font-size: 1.5em;
+            margin: 0 0 15px 0;
+            color: #fff;
+        }
+        
+        .vote-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .vote-list li {
+            background-color: var(--button-bg);
+            margin-bottom: 5px; 
+            border-radius: 8px;
+            transition: all .3s ease-in-out;
+        }
+        
+        .vote-list li:hover {
+            background-color: var(--button-hover-bg);
+            transform: scale(1.03);
+            box-shadow: var(--hover-shadow-color) 0 2px 15px;
+        }
+
+        .vote-list a {
+            display: block;
+            padding: 8px 18px; 
+            color: #eee;
+            text-decoration: none;
+            font-size: 1em; 
+            font-weight: bold;
+        }
+        
+
         footer {
-            margin-top: 30px; 
+            margin-top: 20px; 
             font-size: 0.75em; 
             text-align: center;
             color: #ccc; 
@@ -267,23 +278,25 @@
         <a href="/rules">Правила</a>
         <a href="/guides">Гайди</a>
         <a href="/map" target="_blank">Карта</a>
-        <a href="/status" target="_blank">Статус</a>
+        <a href="https://status.prosto-land.top" target="_blank">Статус</a>
     </nav>
 </header>
 
 <main class="container">
-    <h1>Як зайти на сервер?</h1>
-    <ol class="instructions-list">
-        <li>Відкрийте лаунчер Minecraft.</li>
-        <li>Оберіть версію гри: від <b>1.20.1</b> до найновішої.</li>
-        <li>Додайте до списку серверів IP: <b id="ip-address" data-original-text="prosto-land.top">prosto-land.top</b></li>
-        <li>Готово, ви на сервері!</li>
-    </ol>
-    <a class="btn" href="/">Повернутися на головну</a>
+    <h2>Список майнкрафт моніторингів:</h2>
+    <ul class="vote-list">
+        <li><a href="https://mc-servera.net/vote/97990" target="_blank">1. Mc-servera</a></li>
+        <li><a href="https://hotmc.ru/minecraft-server-241601" target="_blank">2. Hotmc</a></li>
+        <li><a href="https://minecraft.org.ua/minecraft-servers/Prosto-Land/1819" target="_blank">3. Minecraft.org.ua</a></li>
+        <li><a href="http://disflip.com/server/985904892596084757" target="_blank">4. Disflip</a></li>
+        <li><a href="https://minecraftrating.ru/server/231663/" target="_blank">5. Minecraftrating</a></li>
+        <li><a href="https://allmc.in.ua/prosto-land-top" target="_blank">6. Allmc</a></li>
+        <li><a href="https://mcua.top/server-prosto-land.51/vote" target="_blank">7. MCUA</a></li>
+    </ul>
 </main>
 
 <footer>
-    <p>&copy; 2022-2025 Prosto-Land. Всі права захищено.</p>
+    <p> 2022-<span id="year"></span> Prosto-Land.</p>
     <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
 </footer>
 
@@ -302,22 +315,9 @@
     menuToggle.addEventListener('click', () => toggleMenu(true));
     closeMenuBtn.addEventListener('click', () => toggleMenu(false));
 
-    const ipAddressElement = document.getElementById('ip-address');
-    if (ipAddressElement) {
-        ipAddressElement.addEventListener('click', () => {
-            const ip = ipAddressElement.dataset.originalText;
-            navigator.clipboard.writeText(ip).then(() => {
-                ipAddressElement.textContent = 'Скопійовано!';
-                ipAddressElement.style.color = '#fff';
-                setTimeout(() => {
-                    ipAddressElement.textContent = ip;
-                    ipAddressElement.style.color = 'var(--highlight-color)';
-                }, 1500);
-            }).catch(err => {
-                console.error('Не вдалося скопіювати IP: ', err);
-            });
-        });
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('year').textContent = new Date().getFullYear();
+    });
 </script>
 
 </body>
