@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosto-Land | Проголосувати за сервер</title>
-    <meta name="description" content="Проголосуйте за сервер Prosto-Land на найкращих моніторингах Minecraft та отримайте нагороди в грі.">
-    <meta name="keywords" content="Minecraft, сервер, голосування, Prosto-Land, моніторинг, mc-servera, hotmc">
+    <title>Prosto-Land | Як грати на сервері?</title>
+    <meta name="description" content="Інструкція як почати грати на сервері Prosto-Land. IP адреса сервера та необхідна версія Minecraft.">
+    <meta name="keywords" content="Minecraft, сервер, як грати, IP, Prosto-Land, інструкція, версія">
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
@@ -20,13 +20,11 @@
             --shadow-color: rgba(0, 0, 0, 0.4);
             --hover-shadow-color: rgba(31, 208, 205, 0.3); 
         }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
         body {
             font-family: 'Open Sans', sans-serif;
             min-height: 100vh;
@@ -39,26 +37,22 @@
             justify-content: center;
             padding: 20px;
         }
-
         .container {
             width: 100%;
             max-width: 850px;
         }
-
         header {
             width: 100%;
             margin-bottom: 20px;
             position: relative;
             height: 50px;
         }
-
         .top-bar-nav {
             display: flex;
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap; 
         }
-
         .top-bar-nav a {
             display: block;
             padding: 12px 18px;
@@ -69,38 +63,32 @@
             transition: all .3s ease-in-out;
             white-space: nowrap;
         }
-
         .top-bar-nav a:hover {
             background-image: linear-gradient(92.88deg, var(--button-hover-bg) 9.16%, var(--button-hover-bg) 43.89%, var(--button-hover-bg) 64.72%);
             box-shadow: var(--hover-shadow-color) 0 2px 20px;
             transform: translateY(-2px);
             color: #fff;
         }
-
         .menu-toggle, .close-menu-btn {
             display: none;
         }
-
         main.container {
             background-color: var(--container-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 25px 25px; 
+            padding: 40px 25px; 
             box-shadow: 3px 3px 8px 2px var(--shadow-color);
             border-radius: 10px;
             text-align: center;
             z-index: 1;
-            max-width: 800px; 
         }
-
         main h1 {
             font-size: 2.5em;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             color: #fff;
             font-weight: 700;
         }
-
         main .description {
             font-size: 1.1em;
             line-height: 1.7;
@@ -108,13 +96,35 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         main b {
             color: var(--highlight-color);
         }
-
-        .btn {
+        .instructions-list {
+            text-align: left;
             display: inline-block;
+            margin: 0 auto;
+            max-width: 500px; 
+            font-size: 1.1em;
+            line-height: 1.8;
+            padding-left: 20px;
+        }
+        .instructions-list b {
+            color: var(--highlight-color);
+        }
+        .instructions-list b#ip-address {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            transition: color 0.2s ease;
+        }
+        .instructions-list b#ip-address:hover {
+            color: #fff;
+        }
+        .btn {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: fit-content;
             padding: 15px 30px;
             margin-top: 30px;
             color: #ffffff;
@@ -127,53 +137,14 @@
             transition: all .3s ease-in-out;
             border: none;
         }
-
         .btn:hover {
             background-image: linear-gradient(45deg, #1a9a98 0%, var(--highlight-color) 100%);
             box-shadow: 0 4px 25px var(--hover-shadow-color);
             transform: scale(1.05);
             letter-spacing: 1px;
         }
-
-        main h2 {
-            font-size: 1.5em;
-            margin: 0 0 15px 0;
-            color: #fff;
-        }
-        
-        .vote-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .vote-list li {
-            background-color: var(--button-bg);
-            margin-bottom: 5px; 
-            border-radius: 8px;
-            transition: all .3s ease-in-out;
-        }
-        
-        .vote-list li:hover {
-            background-color: var(--button-hover-bg);
-            transform: scale(1.03);
-            box-shadow: var(--hover-shadow-color) 0 2px 15px;
-        }
-
-        .vote-list a {
-            display: block;
-            padding: 8px 18px; 
-            color: #eee;
-            text-decoration: none;
-            font-size: 1em; 
-            font-weight: bold;
-        }
-        
-
         footer {
-            margin-top: 20px; 
+            margin-top: 30px; 
             font-size: 0.75em; 
             text-align: center;
             color: #ccc; 
@@ -182,11 +153,9 @@
             width: 100%;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
-        
         footer p {
             margin-bottom: 5px;
         }
-
         @media (max-width: 820px) {
             .menu-toggle {
                 display: block;
@@ -201,7 +170,6 @@
                 border-radius: 8px;
                 z-index: 20;
             }
-
             .menu-toggle .bar {
                 display: block;
                 width: 25px;
@@ -209,11 +177,9 @@
                 background-color: var(--text-color);
                 margin: 5px auto;
             }
-
             .top-bar-nav {
                 display: none;
             }
-
             .top-bar-nav.is-active {
                 display: flex;
                 flex-direction: column; 
@@ -232,7 +198,6 @@
                 gap: 12px; 
                 overflow-y: auto; 
             }
-
             .top-bar-nav.is-active a {
                 padding: 15px; 
                 margin: 0;
@@ -242,7 +207,6 @@
                 max-width: 400px; 
                 min-width: auto;
             }
-
             .top-bar-nav.is-active .close-menu-btn {
                 display: block;
                 position: absolute;
@@ -254,7 +218,6 @@
                 color: #fff;
                 cursor: pointer;
             }
-
             body.menu-open {
                 overflow: hidden;
             }
@@ -278,21 +241,19 @@
         <a href="/rules">Правила</a>
         <a href="/guides">Гайди</a>
         <a href="/map" target="_blank">Карта</a>
-        <a href="https://status.prosto-land.top" target="_blank">Статус</a>
+        <a href="/status" target="_blank">Статус</a>
     </nav>
 </header>
 
 <main class="container">
-    <h2>Список майнкрафт моніторингів:</h2>
-    <ul class="vote-list">
-        <li><a href="https://mc-servera.net/vote/97990" target="_blank">1. Mc-servera</a></li>
-        <li><a href="https://hotmc.ru/minecraft-server-241601" target="_blank">2. Hotmc</a></li>
-        <li><a href="https://minecraft.org.ua/minecraft-servers/Prosto-Land/1819" target="_blank">3. Minecraft.org.ua</a></li>
-        <li><a href="http://disflip.com/server/985904892596084757" target="_blank">4. Disflip</a></li>
-        <li><a href="https://minecraftrating.ru/server/231663/" target="_blank">5. Minecraftrating</a></li>
-        <li><a href="https://allmc.in.ua/prosto-land-top" target="_blank">6. Allmc</a></li>
-        <li><a href="https://mcua.top/server-prosto-land.51/vote" target="_blank">7. MCUA</a></li>
-    </ul>
+    <h1>Як зайти на сервер?</h1>
+    <ol class="instructions-list">
+        <li>Відкрийте лаунчер Minecraft.</li>
+        <li>Оберіть версію гри: від <b>1.20.1</b> до найновішої.</li>
+        <li>Додайте до списку серверів IP: <b id="ip-address" data-original-text="prosto-land.top">prosto-land.top</b></li>
+        <li>Готово, ви на сервері!</li>
+    </ol>
+    <a class="btn" href="/">Повернутися на головну</a>
 </main>
 
 <footer>
@@ -315,10 +276,28 @@
     menuToggle.addEventListener('click', () => toggleMenu(true));
     closeMenuBtn.addEventListener('click', () => toggleMenu(false));
 
+    const ipAddressElement = document.getElementById('ip-address');
+    if (ipAddressElement) {
+        ipAddressElement.addEventListener('click', () => {
+            const ip = ipAddressElement.dataset.originalText;
+            navigator.clipboard.writeText(ip).then(() => {
+                ipAddressElement.textContent = 'Скопійовано!';
+                ipAddressElement.style.color = '#fff';
+                setTimeout(() => {
+                    ipAddressElement.textContent = ip;
+                    ipAddressElement.style.color = 'var(--highlight-color)';
+                }, 1500);
+            }).catch(err => {
+                console.error('Не вдалося скопіювати IP: ', err);
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('year').textContent = new Date().getFullYear();
     });
 </script>
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"917a1ccdaefc44e99be4d19b2e25bdde","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
