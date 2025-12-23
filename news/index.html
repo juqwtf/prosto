@@ -13,9 +13,10 @@
             --container-bg: rgba(51, 51, 51, 0.95); 
             --text-color: #eee;
             --highlight-color: #1fd0cd;
-            --button-bg: #5a5a5a;
-            --button-hover-bg: #6e6e6e;
+            --button-bg: #414141;
+            --button-hover-bg: #545454;
             --shadow-color: rgba(0, 0, 0, 0.6);
+            --hover-shadow-color: rgba(31, 208, 205, 0.3);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,18 +46,21 @@
         }
 
         .nav-btn-link {
-            background-color: var(--button-bg);
+            display: block;
+            padding: 12px 18px;
+            background-image: linear-gradient(92.88deg, var(--button-bg) 9.16%, var(--button-bg) 43.89%, var(--button-bg) 64.72%);
             color: #ccc;
             text-decoration: none;
-            padding: 10px 20px;
             border-radius: 8px;
             font-size: 16px;
-            transition: background-color 0.3s, color 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all .3s ease-in-out;
+            white-space: nowrap;
         }
 
         .nav-btn-link:hover {
-            background-color: var(--button-hover-bg);
+            background-image: linear-gradient(92.88deg, var(--button-hover-bg) 9.16%, var(--button-hover-bg) 43.89%, var(--button-hover-bg) 64.72%);
+            box-shadow: var(--hover-shadow-color) 0 2px 20px;
+            transform: translateY(-2px);
             color: #fff;
         }
 
@@ -254,7 +258,7 @@
 
 <header>
     <a href="/" class="nav-btn-link">Головна</a>
-    <a href="/news" class="nav-btn-link" style="background-color: var(--button-hover-bg); color: #fff;">Новини</a>
+    <a href="/news" class="nav-btn-link" style="color: #fff; background-image: linear-gradient(92.88deg, var(--button-hover-bg) 9.16%, var(--button-hover-bg) 43.89%, var(--button-hover-bg) 64.72%); box-shadow: var(--hover-shadow-color) 0 2px 20px; transform: translateY(-2px);">Новини</a>
     <a href="/vote" class="nav-btn-link">Голосувати</a>
     <a href="/discord" class="nav-btn-link">Діскорд</a>
     <a href="/donat" class="nav-btn-link">Донат</a>
