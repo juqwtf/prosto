@@ -10,12 +10,12 @@
     <style>
         :root {
             --primary-bg: #1c1515;
-            --container-bg: rgba(51, 51, 51, 0.9); 
+            --container-bg: rgba(51, 51, 51, 0.85); 
             --text-color: #eee;
             --highlight-color: #1fd0cd;
-            --button-bg: #414141;
-            --button-hover-bg: #545454;
-            --shadow-color: rgba(0, 0, 0, 0.6);
+            --button-bg: #5a5a5a;
+            --button-hover-bg: #6e6e6e;
+            --shadow-color: rgba(0, 0, 0, 0.4);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,182 +29,223 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden; /* Щоб не було горизонтального скролу */
+            justify-content: flex-start;
+            padding-top: 30px;
         }
 
-        /* Header */
-        header { width: 100%; height: 60px; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); position: fixed; top:0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .top-bar-nav { display: flex; gap: 15px; }
-        .top-bar-nav a { padding: 8px 16px; background: rgba(255,255,255,0.1); color: #ccc; text-decoration: none; border-radius: 6px; transition: 0.3s; font-size: 0.9em; font-weight: bold; }
-        .top-bar-nav a:hover, .top-bar-nav a.active { background: var(--highlight-color); color: #000; box-shadow: 0 0 10px var(--highlight-color); }
-        .menu-toggle { display: none; } /* Спрощено для ПК, на мобільному можна додати */
+        /* HEADER Buttons Style (Old Design) */
+        header { 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            margin-bottom: 30px; 
+            z-index: 10;
+        }
 
-        /* MAIN Layout */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .nav-btn-link {
+            background-color: var(--button-bg);
+            color: #ccc;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn-link:hover {
+            background-color: var(--button-hover-bg);
+            color: #fff;
+        }
+
+        /* Main Content Box (Old Design Style) */
+        .main-container {
             width: 100%;
-            padding-top: 80px; /* Відступ від фіксованого хедера */
-            padding-bottom: 40px;
-        }
-
-        .slider-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        /* News Box 800x800 */
-        .news-box {
-            width: 800px;
-            height: 800px;
+            max-width: 850px;
             background-color: var(--container-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
             padding: 40px;
-            overflow-y: auto; /* Внутрішній скрол */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
             position: relative;
-            /* Стилізація скролбару */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 500px; /* Мінімальна висота для гарного вигляду */
+        }
+
+        /* Slider Wrapper */
+        .slider-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: flex-start; /* Вирівнювання по верху контенту */
+            justify-content: space-between;
+            gap: 20px;
+            height: 100%;
+            flex: 1;
+        }
+
+        /* News Content Area (Scrollable) */
+        .news-content-box {
+            flex: 1;
+            text-align: left;
+            max-height: 600px; /* Обмеження висоти для скролу всередині */
+            overflow-y: auto;
+            padding-right: 15px; /* Місце для скролбару */
+            
+            /* Custom Scrollbar */
             scrollbar-width: thin;
             scrollbar-color: var(--highlight-color) rgba(0,0,0,0.3);
         }
+        
+        .news-content-box::-webkit-scrollbar { width: 8px; }
+        .news-content-box::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 4px; }
+        .news-content-box::-webkit-scrollbar-thumb { background-color: var(--highlight-color); border-radius: 4px; }
 
-        .news-box::-webkit-scrollbar { width: 8px; }
-        .news-box::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 4px; }
-        .news-box::-webkit-scrollbar-thumb { background-color: var(--highlight-color); border-radius: 4px; }
+        /* Typography */
+        .news-date {
+            color: var(--highlight-color);
+            font-size: 0.9em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
 
-        /* Navigation Buttons (Arrows) */
-        .nav-btn {
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            width: 60px;
-            height: 60px;
+        .news-title {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .news-body {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .news-body img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Navigation Arrows */
+        .arrow-btn {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s;
-            user-select: none;
+            transition: 0.3s;
+            flex-shrink: 0; /* Щоб не стискалися */
+            margin-top: 20px; /* Трохи відступу зверху */
         }
-        .nav-btn:hover:not(:disabled) {
+
+        .arrow-btn:hover:not(:disabled) {
             background: var(--highlight-color);
             color: #000;
-            transform: scale(1.1);
         }
-        .nav-btn:disabled {
-            opacity: 0.3;
+
+        .arrow-btn:disabled {
+            opacity: 0.2;
             cursor: not-allowed;
-            border-color: transparent;
         }
 
-        /* News Content Styling */
-        .news-date {
-            color: var(--highlight-color);
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            font-weight: bold;
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .news-title {
-            font-size: 2.5em;
-            margin-bottom: 25px;
-            line-height: 1.2;
-            color: #fff;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-        }
-        .news-content {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #ddd;
-        }
-        
-        /* Image Support inside Content */
-        .news-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: block; /* Щоб не було збоку тексту, якщо не налаштовано */
-        }
-
-        /* Loading / Error states */
         .status-msg {
-            display: flex;
-            height: 100%;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
             color: #aaa;
-            flex-direction: column;
-            gap: 15px;
+            font-size: 1.2em;
+            margin-top: 50px;
         }
 
-        @media (max-width: 1000px) {
-            .news-box { width: 90vw; height: 70vh; padding: 20px; }
-            .slider-wrapper { flex-direction: column; gap: 10px; }
-            .nav-btn { width: 50px; height: 50px; transform: rotate(90deg); /* Стрілки вверх/вниз на мобільному */ }
-            /* Повертаємо стрілки назад якщо треба */
-            .nav-btn.prev { transform: rotate(90deg); } 
-            .nav-btn.next { transform: rotate(90deg); }
-            /* Або краще розташувати їх знизу поруч */
-            .slider-wrapper { position: relative; }
-            .nav-btn { position: absolute; bottom: 20px; z-index: 10; transform: none; }
-            .prev { left: 20px; }
-            .next { right: 20px; }
-            .news-box { padding-bottom: 80px; } /* Місце під кнопки */
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.8em;
+            color: #ccc;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+
+        @media (max-width: 800px) {
+            .slider-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            .news-content-box {
+                max-height: none;
+                overflow-y: visible;
+            }
+            .arrow-btn {
+                transform: rotate(90deg); /* Стрілки вертикально на мобільних */
+                width: 40px; height: 40px; font-size: 1.5rem;
+                margin: 10px;
+            }
+            /* Перемістимо стрілки: одну наверх, іншу вниз */
+            .slider-wrapper { position: relative; padding-bottom: 50px; }
+            #btn-prev { order: -1; } /* Вгору */
+            #btn-next { order: 2; }  /* Вниз */
         }
     </style>
 </head>
 <body>
 
 <header>
-    <nav class="top-bar-nav">
-        <a href="/">Головна</a>
-        <a href="/news" class="active">Новини</a>
-        <a href="/vote">Голосувати</a>
-        <a href="/donat">Донат</a>
-        <a href="/rules">Правила</a>
-    </nav>
+    <a href="/" class="nav-btn-link">Головна</a>
+    <a href="/news" class="nav-btn-link" style="background-color: var(--button-hover-bg); color: #fff;">Новини</a> <a href="/vote" class="nav-btn-link">Голосувати</a>
+    <a href="/discord" class="nav-btn-link">Діскорд</a>
+    <a href="/donat" class="nav-btn-link">Донат</a>
+    <a href="/rules" class="nav-btn-link">Правила</a>
+    <a href="/guides" class="nav-btn-link">Гайди</a>
+    <a href="/map" class="nav-btn-link">Карта</a>
+    <a href="/status" class="nav-btn-link">Статус</a>
 </header>
 
-<main>
+<div class="main-container">
     <div class="slider-wrapper">
-        <button class="nav-btn prev" id="btn-prev" onclick="changePage(-1)">&#10094;</button>
-        
-        <div class="news-box" id="news-container">
-            <div class="status-msg">Завантаження...</div>
+        <button class="arrow-btn" id="btn-prev" onclick="changePage(-1)">&#10094;</button>
+
+        <div class="news-content-box" id="news-display">
+            <div class="status-msg">Завантаження новин...</div>
         </div>
 
-        <button class="nav-btn next" id="btn-next" onclick="changePage(1)">&#10095;</button>
+        <button class="arrow-btn" id="btn-next" onclick="changePage(1)">&#10095;</button>
     </div>
-</main>
+</div>
+
+<footer>
+    <p>2022-<span id="year"></span> Prosto-Land.</p>
+    <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
+</footer>
 
 <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     let currentPage = 1;
     let totalPages = 1;
 
     async function fetchNews(page) {
-        const container = document.getElementById('news-container');
+        const container = document.getElementById('news-display');
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
 
-        // Ефект "зникнення" перед завантаженням
-        container.style.opacity = '0.5';
+        container.style.opacity = '0.5'; // Ефект завантаження
 
         try {
-            // Запитуємо API: limit=1 (одна новина на сторінку)
+            // Отримуємо 1 новину на сторінку
             const response = await fetch(`https://api.prosto-land.top/api/public/news?page=${page}&limit=1`);
             
             if (!response.ok) throw new Error('Помилка сервера');
@@ -216,23 +257,23 @@
 
             if (data.items.length === 0) {
                 container.innerHTML = '<div class="status-msg">Новин поки немає 🤷‍♂️</div>';
-                toggleButtons(false, false);
-                container.style.opacity = '1';
+                updateButtons(false, false);
                 return;
             }
 
-            const item = data.items[0]; // Беремо першу (і єдину) новину
+            const item = data.items[0];
             const date = new Date(item.created_at).toLocaleString('uk-UA', { 
                 day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute:'2-digit' 
             });
 
-            // Рендеримо контент. Використовуємо item.content як HTML, щоб працювали картинки
+            // Рендер контенту
             container.innerHTML = `
                 <span class="news-date">${date}</span>
-                <h1 class="news-title">${escapeHtml(item.title)}</h1>
-                <div class="news-content">${item.content}</div> `;
-
-            // Скролимо наверх при перемиканні
+                <div class="news-title">${escapeHtml(item.title)}</div>
+                <div class="news-body">${item.content}</div>
+            `;
+            
+            // Скрол тексту нагору при перемиканні
             container.scrollTop = 0;
 
         } catch (error) {
@@ -245,21 +286,11 @@
     }
 
     function updateButtons() {
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        
-        // Логіка: "Назад" веде до старіших новин (більший номер сторінки, бо сортування Newest first)
-        // Але для користувача логічніше: 
-        // <- (Ліворуч) - Наступна (новіша) або Попередня?
-        // Зазвичай слайдери: <- (Назад/Попередня) ... -> (Вперед/Наступна)
-        // Оскільки API віддає [0] як найновішу:
-        // Page 1 = Найсвіжіша.
-        // Page 2 = Старіша.
-        // Тому натискання "Next ->" має збільшувати Page (йти в минуле).
-        // Натискання "Prev <-" має зменшувати Page (йти до свіжих).
-
-        btnPrev.disabled = currentPage <= 1;
-        btnNext.disabled = currentPage >= totalPages;
+        // Логіка: Page 1 = найновіша. 
+        // Prev (<) - йде до менших сторінок (новіших).
+        // Next (>) - йде до більших сторінок (старіших).
+        document.getElementById('btn-prev').disabled = currentPage <= 1;
+        document.getElementById('btn-next').disabled = currentPage >= totalPages;
     }
 
     function changePage(delta) {
@@ -269,18 +300,12 @@
         }
     }
 
-    function toggleButtons(prev, next) {
-        document.getElementById('btn-prev').disabled = !prev;
-        document.getElementById('btn-next').disabled = !next;
-    }
-
-    // Безпечний вивід заголовка (але контент залишаємо HTML)
     function escapeHtml(text) {
         if (!text) return "";
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 
-    // Старт
+    // Запускаємо
     fetchNews(1);
 </script>
 
