@@ -10,10 +10,11 @@
     <style>
         :root {
             --primary-bg: #1c1515;
-            --container-bg: rgba(51, 51, 51, 0.85); 
-            --text-color: #eee;
-            --shadow-color: rgba(0, 0, 0, 0.4);
+            --container-bg: rgba(40, 40, 40, 0.9); 
+            --text-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.5);
             --highlight-color: #1fd0cd;
+            --highlight-bg: rgba(31, 208, 205, 0.15);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,77 +41,126 @@
 
         main.container {
             width: 100%;
-            max-width: 850px; 
+            max-width: 800px; 
             background-color: var(--container-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px 40px;
-            box-shadow: 3px 3px 8px 2px var(--shadow-color);
-            border-radius: 10px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 40px 40px 25px 40px; 
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 12px;
             text-align: center;
             z-index: 1;
-            margin-bottom: 20px;
         }
 
         main h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 2.2em;
+            margin-bottom: 25px;
             color: #fff;
             font-weight: 700;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 20px;
         }
 
         .content-text {
             text-align: left; 
-            line-height: 1.6;
-            color: #ddd;
-            font-size: 1rem;
+            line-height: 1.7;
+            font-size: 0.92rem;
         }
 
         .content-text p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .content-text strong {
             color: var(--highlight-color);
+            background: var(--highlight-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
         }
 
-        /* Футер */
+        code {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px solid rgba(31, 208, 205, 0.3);
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .back-btn-container {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--highlight-color);
+            border: 1px solid var(--highlight-color);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background-color: var(--highlight-color);
+            color: #111;
+            box-shadow: 0 0 20px rgba(31, 208, 205, 0.3);
+            transform: translateY(-2px);
+        }
+
         footer {
-            margin-top: 10px; 
-            font-size: 0.75em; 
+            margin-top: 10px;
+            font-size: 0.7em; 
             text-align: center;
-            color: #ccc; 
+            color: #aaa; 
             z-index: 1; 
             width: 100%;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
+
+        footer p { margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
 <div class="layout-wrapper">
-    
     <main class="container">
-        <h1>📚 База знань</h1>
+        <h1>📚 Як почати грати на сервері?</h1>
         
-        <div class="content-text">
-            <p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div class="content-text">            
+            <p><strong>1. Версія гри:</strong> Наш сервер працює на версії <strong>1.20.1</strong> (та вище). Ви можете використовувати як <strong>ліцензійний лаунчер</strong>, так і перевірені безкоштовні аналоги.</p>
             
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p><strong>2. Підключення:</strong> В головному меню оберіть <strong>Мережева гра</strong> → <strong>Додати сервер</strong>. У полі адреси вкажіть наш офіційний IP: <strong>prosto-land.top</strong></p>
             
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <p><strong>3. Перший вхід:</strong> Для захисту вашого акаунту необхідно зареєструватися. Відкрийте ігровий чат клавішею <strong>[T]</strong> або <strong>[/]</strong> та введіть:</p>
+            <code>/register [ваш_пароль]</code>
+            
+            <p><strong>4. Авторизація:</strong> При кожному вході система попросить вас підтвердити особу командою:</p>
+            <code>/login [ваш_пароль]</code>
         </div>
-        
+
+        <div class="back-btn-container">
+            <a href="https://prosto-land.top/wiki/" class="back-btn">⬅ Назад до вікі</a>
+        </div>
     </main>
 
     <footer>
         <p> 2022-<span id="year"></span> Prosto-Land.</p>
         <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
     </footer>
-
 </div>
 
 <script>
