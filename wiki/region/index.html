@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosto-Land | Гайди</title>
+    <title>Prosto-Land | Приват</title>
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
     <style>
         :root {
             --primary-bg: #1c1515;
-            --container-bg: rgba(51, 51, 51, 0.85); 
-            --text-color: #eee;
-            --shadow-color: rgba(0, 0, 0, 0.4);
+            --container-bg: rgba(40, 40, 40, 0.9); 
+            --text-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.5);
             --highlight-color: #1fd0cd;
+            --highlight-bg: rgba(31, 208, 205, 0.15);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,81 +39,145 @@
             align-items: center;
         }
 
-        /* Основний контейнер (BOX) */
         main.container {
             width: 100%;
-            max-width: 850px; 
+            max-width: 800px; 
             background-color: var(--container-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px 40px; /* Трохи збільшив бічні відступи */
-            box-shadow: 3px 3px 8px 2px var(--shadow-color);
-            border-radius: 10px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 40px 40px 25px 40px; 
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 12px;
             text-align: center;
             z-index: 1;
-            margin-bottom: 20px;
         }
 
         main h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 20px;
             color: #fff;
             font-weight: 700;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 15px;
         }
 
-        /* Стилі для тексту всередині */
         .content-text {
-            text-align: left; /* Текст зручніше читати зліва */
+            text-align: left; 
             line-height: 1.6;
-            color: #ddd;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
-        .content-text p {
-            margin-bottom: 15px;
-        }
+        .content-text p { margin-bottom: 12px; }
 
         .content-text strong {
             color: var(--highlight-color);
+            background: var(--highlight-bg);
+            padding: 1px 5px;
+            border-radius: 4px;
         }
 
-        /* Футер */
+        .benefits {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--highlight-color);
+        }
+
+        code {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px solid rgba(31, 208, 205, 0.3);
+            font-size: 0.9em;
+        }
+
+        .back-btn-container {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--highlight-color);
+            border: 1px solid var(--highlight-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .back-btn.primary { background-color: var(--highlight-bg); }
+
+        .back-btn:hover {
+            background-color: var(--highlight-color);
+            color: #111;
+            box-shadow: 0 0 15px rgba(31, 208, 205, 0.3);
+            transform: translateY(-2px);
+        }
+
         footer {
-            margin-top: 10px; 
-            font-size: 0.75em; 
+            margin-top: 10px;
+            font-size: 0.65em; 
             text-align: center;
-            color: #ccc; 
-            z-index: 1; 
+            color: #aaa; 
             width: 100%;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
     </style>
 </head>
 <body>
 
 <div class="layout-wrapper">
-    
     <main class="container">
-        <h1>📚 База знань</h1>
+        <h1>🛡️ Приват території</h1>
         
         <div class="content-text">
-            <p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div class="benefits">
+                <p><strong>Навіщо це потрібно?</strong> Захищає дім від гриферів: блоки, скрині будуть у повній безпеці.</p>
+            </div>
+
+            <p><strong>1. Початок:</strong> Візьміть у руки <strong>дерев'яну сокиру</strong> (її можна отримати командою <code>//wand</code>).</p>
             
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p><strong>2. Виділення:</strong> Натисніть <strong>ЛКМ</strong> по блоку в одному куті зони та <strong>ПКМ</strong> по блоку, по діагоналі.</p>
             
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <p><strong>3. Розширення:</strong> Щоб захиститися від підкопів та стовпів над регіоном, розширте виділення. Команда <code>//expand vert</code> розтягує приват від неба до бедроку. Якщо потрібно розширити на певну висоту, введіть <code>//expand [число] up</code> або <code>//expand [число] down</code>.</p>
+
+            <p><strong>Враховуйте ліміти блоків:</strong>
+                 <strong>Гравець / Сержант:</strong> 250 000
+                 <strong>Майор:</strong> 300 000
+                 <strong>Генерал:</strong> 350 000
+                 <strong>Спонсор:</strong> 400 000
+            </p>
+
+            <p><strong>4. Створення:</strong> Закріпіть територію командою: <code>/rg claim [назва]</code>.</p>
+
+            <p><strong>5. Керування:</strong> Станьте у свойому регіоні та введіть <code>/rg info</code>. У чаті ви знайдете зручні кнопки для додавання або видалення друзів тімейтів чи друзів.</p>
         </div>
-        
+
+        <div class="back-btn-container">
+            <a href="https://prosto-land.top/wiki/" class="back-btn">⬅ Назад до вікі</a>
+        </div>
+
     </main>
 
     <footer>
         <p> 2022-<span id="year"></span> Prosto-Land.</p>
         <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
     </footer>
-
 </div>
 
 <script>
