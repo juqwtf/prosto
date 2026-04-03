@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosto-Land | Гайди</title>
+    <title>Prosto-Land | Заробіток</title>
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
     <style>
         :root {
             --primary-bg: #1c1515;
-            --container-bg: rgba(51, 51, 51, 0.85); 
-            --text-color: #eee;
-            --shadow-color: rgba(0, 0, 0, 0.4);
+            --container-bg: rgba(40, 40, 40, 0.9); 
+            --text-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.5);
             --highlight-color: #1fd0cd;
+            --highlight-bg: rgba(31, 208, 205, 0.15);
+            --job-bg: rgba(20, 20, 20, 0.6);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,81 +40,274 @@
             align-items: center;
         }
 
-        /* Основний контейнер (BOX) */
         main.container {
             width: 100%;
-            max-width: 850px; 
+            max-width: 950px; 
             background-color: var(--container-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px 40px; /* Трохи збільшив бічні відступи */
-            box-shadow: 3px 3px 8px 2px var(--shadow-color);
-            border-radius: 10px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 40px; 
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 12px;
             text-align: center;
             z-index: 1;
-            margin-bottom: 20px;
         }
 
         main h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
             color: #fff;
             font-weight: 700;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
-        /* Стилі для тексту всередині */
-        .content-text {
-            text-align: left; /* Текст зручніше читати зліва */
-            line-height: 1.6;
-            color: #ddd;
-            font-size: 1rem;
+        main h2 {
+            color: #fff;
+            font-size: 1.15em;
+            margin: 20px 0 10px 0;
+            text-align: left;
+            border-left: 3px solid var(--highlight-color);
+            padding-left: 10px;
         }
 
-        .content-text p {
+        .description {
+            font-size: 0.9em;
+            color: #bbb;
             margin-bottom: 15px;
+            line-height: 1.5;
+            text-align: left;
         }
 
-        .content-text strong {
+        code {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px solid rgba(31, 208, 205, 0.3);
+            font-size: 0.9em;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            text-align: left;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px;
+            border-radius: 8px;
+            border-top: 2px solid var(--highlight-color);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .method-title {
+            font-weight: bold;
             color: var(--highlight-color);
+            font-size: 1.05em;
         }
 
-        /* Футер */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: left;
+        }
+
+        @media (max-width: 800px) {
+            .jobs-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 500px) {
+            .jobs-grid { grid-template-columns: 1fr; }
+        }
+
+        .job-card {
+            background: var(--job-bg);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .job-card-title {
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.95em;
+            margin-bottom: 6px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .job-card-note {
+            font-size: 0.7em;
+            color: #aaa;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .price-list {
+            list-style: none;
+            font-size: 0.75rem;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            color: #ccc;
+        }
+
+        .price-list li span:last-child {
+            color: #55ff55;
+            font-weight: bold;
+            white-space: nowrap;
+            margin-left: 5px;
+        }
+
+        .back-btn-container {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--highlight-color);
+            border: 1px solid var(--highlight-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 0.5px;
+        }
+
+        .back-btn:hover {
+            background-color: var(--highlight-color);
+            color: #111;
+            box-shadow: 0 0 15px rgba(31, 208, 205, 0.3);
+            transform: translateY(-2px);
+        }
+
         footer {
-            margin-top: 10px; 
-            font-size: 0.75em; 
+            margin-top: 10px;
+            font-size: 0.65em; 
             text-align: center;
-            color: #ccc; 
-            z-index: 1; 
+            color: #aaa; 
             width: 100%;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
     </style>
 </head>
 <body>
 
 <div class="layout-wrapper">
-    
     <main class="container">
-        <h1>📚 База знань</h1>
-        
-        <div class="content-text">
-            <p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <h1>💰 Як заробляти кошти</h1>
+
+        <div class="methods-grid">
+            <div class="method-card">
+                <div class="method-header">
+                    <span class="method-title">Батл Пас</span>
+                    <code>/bp</code>
+                </div>
+                <span>Виконуйте завдання та отримуйте поінти. За підвищення рівня видаються гроші, донат-валюта.</span>
+            </div>
+
+            <div class="method-card">
+                <div class="method-header">
+                    <span class="method-title">Скупщик</span>
+                    <code>/seller</code>
+                </div>
+                <span>Швидкий продаж здобутих ресурсів серверу. На продаж діють ліміти, але це стабільне джерело доходу.</span>
+            </div>
+
+            <div class="method-card">
+                <div class="method-header">
+                    <span class="method-title">Аукціон</span>
+                    <code>/ah</code>
+                </div>
+                <span>Ринок гравців. Продавайте будь-що — від їжі до блоків. Ціну на свої товари ви встановлюєте самостійно.</span>
+            </div>
+        </div>
+
+        <h2>Роботи <code>/jobs</code></h2>
+        <div class="description">
+            Щоб заробляти, відкрийте меню робіт та оберіть професію. Після цього в чаті з'явиться сповіщення про обрану професію. Під час  роботи (копання, рубка тощо) зверху буде відображатися спеціальний індикатор із вашим поточним заробітком.
         </div>
         
+        <div class="jobs-grid">
+            <div class="job-card">
+                <div class="job-card-title">⛏ Шахтар</div>
+                <span class="job-card-note">Заробіток за блок:</span>
+                <ul class="price-list">
+                    <li><span>Рідкісні руди:</span> <span>1.75$ - 5.00$</span></li>
+                    <li><span>Звичайні руди:</span> <span>0.25$ - 0.50$</span></li>
+                    <li><span>Глибинні/Пекло:</span> <span>0.35$ - 0.45$</span></li>
+                    <li><span>Каміння/Порода:</span> <span>0.01$</span></li>
+                </ul>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-title">🪓 Лісник</div>
+                <span class="job-card-note">Враховуються всі види:</span>
+                <ul class="price-list">
+                    <li><span>Будь-яке дерево:</span> <span>1.00$</span></li>
+                </ul>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-title">⚔ Мисливець</div>
+                <span class="job-card-note">Тільки звичайний світ:</span>
+                <ul class="price-list">
+                    <li><span>Боси (Warden):</span> <span>20.00$</span></li>
+                    <li><span>Небезпечні:</span> <span>3.00$</span></li>
+                    <li><span>Ворожі:</span> <span>1.50$</span></li>
+                    <li><span>Тварини:</span> <span>0.50$</span></li>
+                </ul>
+            </div>
+
+            <div class="job-card">
+                <div class="job-card-title">🎣 Рибак</div>
+                <span class="job-card-note">Заробіток за улов:</span>
+                <ul class="price-list">
+                    <li><span>Скарби/Книги:</span> <span>5.00$ - 15.00$</span></li>
+                    <li><span>Рідкісна риба:</span> <span>4.00$ - 6.00$</span></li>
+                    <li><span>Звичайна риба:</span> <span>2.00$ - 2.50$</span></li>
+                    <li><span>Сміття:</span> <span>1.00$</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="back-btn-container">
+            <a href="https://prosto-land.top/wiki/" class="back-btn">⬅ Назад до вікі</a>
+        </div>
     </main>
 
     <footer>
-        <p> 2022-<span id="year"></span> Prosto-Land.</p>
+        <p>© 2022-<span id="year"></span> Prosto-Land.</p>
         <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
     </footer>
-
 </div>
 
 <script>
