@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosto-Land | Гайди</title>
+    <title>Prosto-Land | Правила</title>
+    <meta name="description" content="Загальні правила поведінки на сервері Prosto-Land. Ознайомтеся з правилами, щоб уникнути покарань.">
+    <meta name="keywords" content="Minecraft, сервер, правила, Prosto-Land, чат, поведінка">
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
     <style>
         :root {
             --primary-bg: #1c1515;
-            --container-bg: rgba(51, 51, 51, 0.85); 
-            --text-color: #eee;
-            --shadow-color: rgba(0, 0, 0, 0.4);
+            --container-bg: rgba(40, 40, 40, 0.9); 
+            --text-color: #ddd;
             --highlight-color: #1fd0cd;
+            --button-bg: rgba(255, 255, 255, 0.05);
+            --button-hover-bg: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --punishment-bg: rgba(255, 85, 85, 0.15);
+            --punishment-color: #ff7777; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,87 +44,383 @@
             align-items: center;
         }
 
-        /* Основний контейнер (BOX) */
         main.container {
             width: 100%;
             max-width: 850px; 
             background-color: var(--container-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px 40px; /* Трохи збільшив бічні відступи */
-            box-shadow: 3px 3px 8px 2px var(--shadow-color);
-            border-radius: 10px;
-            text-align: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 40px; 
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 12px;
+            text-align: center; 
             z-index: 1;
-            margin-bottom: 20px;
         }
 
-        main h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+        main.container h1 {
+            margin-bottom: 15px; 
+            font-size: 1.8em; 
             color: #fff;
             font-weight: 700;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 15px;
         }
 
-        /* Стилі для тексту всередині */
-        .content-text {
-            text-align: left; /* Текст зручніше читати зліва */
+        .description {
+            font-size: 0.9em;
+            color: #bbb;
+            margin-bottom: 30px;
             line-height: 1.6;
-            color: #ddd;
-            font-size: 1rem;
         }
 
-        .content-text p {
-            margin-bottom: 15px;
-        }
-
-        .content-text strong {
+        .description a {
             color: var(--highlight-color);
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        /* Футер */
-        footer {
-            margin-top: 10px; 
-            font-size: 0.75em; 
-            text-align: center;
-            color: #ccc; 
-            z-index: 1; 
+        .description a:hover {
+            text-decoration: underline;
+        }
+        
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .rule-card {
+            background: var(--button-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rule-card:hover {
+            background: var(--button-hover-bg);
+            border-color: var(--highlight-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(31, 208, 205, 0.15);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: #222;
             width: 100%;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            max-width: 600px;
+            border-radius: 12px;
+            border: 1px solid var(--highlight-color);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 2em;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--highlight-color);
+            border-radius: 3px;
+        }
+
+        .modal-desc {
+            font-size: 0.9em;
+            color: var(--highlight-color);
+            background: rgba(31, 208, 205, 0.1);
+            padding: 12px 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--highlight-color);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .rule-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .rule-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .rule-text {
+            color: #ddd;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .punishment {
+            display: inline-block;
+            font-size: 0.85em;
+            font-style: italic;
+            color: var(--punishment-color);
+            background: var(--punishment-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .rules-warning {
+            margin-top: 15px; 
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #ffcc00; 
+            background: rgba(255, 204, 0, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+        }
+
+        .back-btn-container {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--highlight-color);
+            border: 1px solid var(--highlight-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 0.5px;
+        }
+
+        .back-btn:hover {
+            background-color: var(--highlight-color);
+            color: #111;
+            box-shadow: 0 0 15px rgba(31, 208, 205, 0.3);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            margin-top: 10px;
+            font-size: 0.65em; 
+            text-align: center;
+            color: #aaa; 
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
 <div class="layout-wrapper">
-    
+
     <main class="container">
-        <h1>📚 База знань</h1>
+
+        <h1>📜 Правила Сервера</h1>
         
-        <div class="content-text">
-            <p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <div class="description">
+            Ці правила створені для забезпечення комфортної та чесної гри для кожного. Незнання правил не звільняє від відповідальності. <br><br>
+            Вся інформація базується на офіційному зведенні: <a href="https://www.prosto-land.top/rules/" target="_blank">prosto-land.top/rules</a>
         </div>
-        
+
+        <div class="rules-grid">
+            <div class="rule-card" onclick="openModal('chat')">💬 Чат та спілкування</div>
+            <div class="rule-card" onclick="openModal('gameplay')">🎮 Ігровий процес</div>
+            <div class="rule-card" onclick="openModal('building')">🏗️ Будівництво та гриферство</div>
+            <div class="rule-card" onclick="openModal('rights')">⚖️ Права гравців</div>
+        </div>
+
+        <p class="rules-warning">⚠️ Адміністрація залишає за собою право змінювати правила без додаткових повідомлень. ⚠️</p>
+
+        <div class="back-btn-container">
+            <a href="https://prosto-land.top/wiki/" class="back-btn">⬅ Назад до вікі</a>
+        </div>
+
     </main>
 
     <footer>
-        <p> 2022-<span id="year"></span> Prosto-Land.</p>
+        <p>© 2022-<span id="year"></span> Prosto-Land.</p>
         <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
     </footer>
 
+</div>
+
+<div class="modal-overlay" id="rulesModal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle">Заголовок</div>
+            <button class="close-btn" onclick="closeModal(event)">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+        </div>
+    </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('year').textContent = new Date().getFullYear();
     });
+
+    const rulesData = {
+        chat: {
+            title: "💬 Чат та спілкування",
+            desc: "Мета цих правил — зберегти дружню атмосферу. Сервер є місцем для відпочинку, тому агресія, спам та безпідставні конфлікти тут неприпустимі.",
+            items: [
+                { text: "Заборонено флуд, спам однаковими повідомленнями та рекламу сторонніх ресурсів.", pun: "Мут (від 1 год до ∞)" },
+                { text: "Неприпустимі образи гравців, кібербулінг та перехід на особистості.", pun: "Мут (від 1 год до ∞)" },
+                { text: "Заборонено розпалювати конфлікти на політичному, релігійному чи іншому підґрунті.", pun: "Мут (від 1 год до ∞)" }
+            ]
+        },
+        gameplay: {
+            title: "🎮 Ігровий процес",
+            desc: "Чесна гра — основа сервера. Чіти та використання недопрацювань руйнують економіку та вбивають інтерес до гри в інших учасників.",
+            items: [
+                { text: "Використання читів, сторонніх модифікацій або багів сервера суворо заборонено.", pun: "Бан (від 3 дн до ∞)" },
+                { text: "Заборонено створювати мультиакаунти з метою отримання переваги та передавати свій акаунт іншим особам.", pun: "Бан (∞)" },
+                { text: "Заборонено обманювати адміністрацію та замовчувати про порушників чи багоюзерів.", pun: "Бан (від 3 дн до ∞)" }
+            ]
+        },
+        building: {
+            title: "🏗️ Будівництво та гриферство",
+            desc: "Ми поважаємо час та працю кожного. Знищення чужих будівель псує ігровий досвід, а лаг-машини шкодять продуктивності всього сервера.",
+            items: [
+                { text: "Заборонено руйнувати або псувати чужі споруди (гриферство), навіть якщо вони не запривачені.", pun: "Бан (від 30 дн до ∞)" },
+                { text: "Створення будівель, табличок або артів нецензурного характеру карається блокуванням.", pun: "Бан (∞)" },
+                { text: "Суворо заборонено будувати механізми (лаг-машини), які перевантажують або викликають збої в роботі сервера.", pun: "Бан (∞)" }
+            ]
+        },
+        rights: {
+            title: "⚖️ Права гравців",
+            desc: "Ці правила існують для балансу. Вони гарантують, що адміністрація діє в рамках повноважень, а кожен гравець може захистити свої права у разі помилки.",
+            items: [
+                { text: "Ви маєте право подати скаргу на адміністрацію, якщо вважаєте її дії неправомірними.", pun: "" },
+                { text: "Ви можете оскаржити своє покарання, якщо на момент подачі заявки не минула половина терміну.", pun: "" },
+                { text: "Ви маєте право вимагати компенсацію за шкоду від багів сервера (за наявності доказів).", pun: "" }
+            ]
+        }
+    };
+
+    function openModal(category) {
+        const data = rulesData[category];
+        if (!data) return;
+
+        document.getElementById('modalTitle').textContent = data.title;
+        
+        const body = document.getElementById('modalBody');
+        body.innerHTML = '';
+
+        if (data.desc) {
+            const descDiv = document.createElement('div');
+            descDiv.className = 'modal-desc';
+            descDiv.textContent = data.desc;
+            body.appendChild(descDiv);
+        }
+
+        data.items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'rule-item';
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'rule-text';
+            textDiv.textContent = item.text;
+            div.appendChild(textDiv);
+
+            if (item.pun) {
+                const punDiv = document.createElement('div');
+                punDiv.className = 'punishment';
+                punDiv.textContent = item.pun;
+                div.appendChild(punDiv);
+            }
+
+            body.appendChild(div);
+        });
+
+        document.getElementById('rulesModal').classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeModal(e) {
+        if (e) e.preventDefault();
+        document.getElementById('rulesModal').classList.remove('active');
+        document.body.style.overflow = ''; 
+    }
 </script>
 
 </body>
