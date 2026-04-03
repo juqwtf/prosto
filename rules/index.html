@@ -19,7 +19,8 @@
             --button-hover-bg: #545454;
             --shadow-color: rgba(0, 0, 0, 0.4);
             --hover-shadow-color: rgba(31, 208, 205, 0.3); 
-            --punishment-color: #aaa; 
+            --punishment-bg: rgba(255, 85, 85, 0.15);
+            --punishment-color: #ff7777; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -98,81 +99,201 @@
             padding: 40px 25px; 
             box-shadow: 3px 3px 8px 2px var(--shadow-color);
             border-radius: 10px;
-            text-align: left; 
+            text-align: center; 
             z-index: 1;
         }
 
         main.container h1 {
-            text-align: center;
             margin-bottom: 30px; 
             font-size: 2.2em; 
             color: #fff;
         }
         
-        .rules-section {
-            margin-bottom: 10px;
-            border: 1px solid #444;
-            border-radius: 8px;
+        .description {
+            font-size: 0.95em;
+            color: #bbb;
+            margin-bottom: 35px;
+            line-height: 1.6;
         }
 
-        .rules-section summary {
-            font-size: 1.2em;
+        .description a {
+            color: var(--highlight-color);
+            text-decoration: none;
             font-weight: bold;
-            padding: 15px;
-            background-color: var(--button-bg);
+        }
+
+        .description a:hover {
+            text-decoration: underline;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .rule-card {
+            background: var(--button-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
             cursor: pointer;
-            outline: none;
-            transition: background-color 0.2s;
-            position: relative; 
-            list-style: none; 
-        }
-        
-        .rules-section summary:hover {
-            background-color: var(--button-hover-bg);
-        }
-        
-        .rules-section summary::after {
-            content: '+';
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.4em;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #fff;
         }
 
-        .rules-section[open] summary::after {
-             transform: translateY(-50%) rotate(45deg);
+        .rule-card:hover {
+            background: var(--button-hover-bg);
+            border-color: var(--highlight-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(31, 208, 205, 0.15);
         }
 
-        .rules-section .rules-content {
-            padding: 15px; 
-            line-height: 1.7;
-            font-size: 1em; 
-            border-top: 1px solid #444;
+        .rule-card-title {
+            font-size: 1.15em;
+            font-weight: bold;
         }
 
-        .rules-section ol {
-            padding-left: 25px; 
-            margin-top: 10px;
+        .rule-card-desc {
+            font-size: 0.85em;
+            color: #bbb;
+            font-weight: normal;
         }
 
-        .rules-section li {
-            margin-bottom: 12px; 
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: #222;
+            width: 100%;
+            max-width: 750px;
+            border-radius: 12px;
+            border: 1px solid var(--highlight-color);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 2em;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--highlight-color);
+            border-radius: 3px;
+        }
+
+        .modal-desc {
+            font-size: 0.95em;
+            color: #ddd;
+            background: rgba(31, 208, 205, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--highlight-color);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .rule-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .rule-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .rule-text {
+            color: #ddd;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 8px;
         }
 
         .punishment {
+            display: inline-block;
+            font-size: 0.85em;
             font-style: italic;
             color: var(--punishment-color);
-            margin-left: 8px;
-            font-size: 0.9em;
+            background: var(--punishment-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
         }
 
         .rules-warning {
             margin-top: 25px; 
             text-align: center;
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: bold;
-            white-space: nowrap; 
             color: #ffcc00; 
         }
 
@@ -279,70 +400,49 @@
 
     <main class="container">
 
-        <h1>Правила Сервера</h1>
+        <h1>📜 Правила Сервера</h1>
+        
 
-        <details class="rules-section">
-            <summary>1. Правила реєстрації та використання акаунтів</summary>
-            <div class="rules-content">
-                <ol>
-                    <li> Забороняється реєстрація акаунтів з невідповідним нікнеймом <span class="punishment">Бан (∞)</span></li>
-                    <li> Забороняється реєстрація акаунта з націленим заподіяням шкоди серверу, гравцям <span class="punishment">Бан (∞)</span></li>
-                    <li> Забороняються мультиаккаунти у будь якому прояві <span class="punishment">Бан (∞)</span></li>
-                    <li> Забороняється передавати акаунт з будь-яким статусом стороннім особам <span class="punishment">Бан (∞)</span></li>
-                </ol>
+        <div class="rules-grid">
+            <div class="rule-card" onclick="openModal('accounts')">
+                <span class="rule-card-title">1. Правила реєстрації та використання акаунтів</span>
+                <span class="rule-card-desc">Правила створення та володіння аккаунтом</span>
             </div>
-        </details>
-
-        <details class="rules-section">
-            <summary>2. Загальні правила використання чату</summary>
-            <div class="rules-content">
-                <ol>
-                    <li> Забороняється Флуд, та однакові повідомлення <span class="punishment">Мут (від 1 год до ∞)</span></li>
-                    <li> Забороняється кібербулінг, перехід на особистості, гравців <span class="punishment">Мут (від 1 год до ∞)</span></li>
-                    <li> Забороняються дискримінації чи ворожі висловлювання та пропаганда <span class="punishment">Мут (від 1 год до ∞)</span></li>
-                    <li> Забороняється провокувати конфлікт, торкання спірних ситуацій, пов'язаних з політикою, релігією та іншими темами(окрім цькування русських) <span class="punishment">Мут (від 1 год до ∞)</span></li>
-                    <li> Забороняється неадекватна поведінка, яка є неприємною для гравців <span class="punishment">Мут (від 1 год до ∞)</span></li>
-                    <li> Забороняється поширювати посилання на сторонні ресурси, які не належать проекту <span class="punishment">Мут (∞)</span></li>
-                </ol>
+            <div class="rule-card" onclick="openModal('chat')">
+                <span class="rule-card-title">2. Загальні правила використання чату</span>
+                <span class="rule-card-desc">Норми спілкування та поведінки</span>
             </div>
-        </details>
-
-        <details class="rules-section">
-            <summary>3. Загальні правила поведінки на сервері</summary>
-            <div class="rules-content">
-                <ol>
-                    <li> Забороняється отримувати перевагу над гравцями нечесним шляхом <span class="punishment">Бан (від 3дн до ∞)</span></li>
-                    <li> Використання сторонніх модифікацій, програм, багів є порушенням <span class="punishment">Бан (від 3дн до ∞)</span></li>
-                    <li> Забороняється створювати і використовувати будь-що нецензурного характеру <span class="punishment">Бан (∞)</span></li>
-                    <li> Забороняється замовчувати про порушників, читерів, багоюзерів <span class="punishment">Бан (∞)</span></li>
-                    <li> Забороняється отримання статистики нечесним шляхом <span class="punishment">Бан (від 3дн до 30 дн)</span></li>
-                    <li> Забороняється вводити адміністрацію в оману/обманювати/брехати <span class="punishment">Бан (від 3дн до ∞)</span></li>
-                    <li> Забороняється створювати механізми, що викликають лаги або збої на сервері <span class="punishment">Бан (∞)</span></li>
-                    <li> Забороняється гріферити інших гравців, або заважати будь-яким чином <span class="punishment">Бан (від 30дн до ∞)</span></li>
-                </ol>
+            <div class="rule-card" onclick="openModal('gameplay')">
+                <span class="rule-card-title">3. Загальні правила поведінки на сервері</span>
+                <span class="rule-card-desc">Чесна гра, заборона читів та багів</span>
             </div>
-        </details>
-
-        <details class="rules-section">
-            <summary>Також ви можете/маєте:</summary>
-            <div class="rules-content">
-                <ol>
-                    <li> Право подати скаргу на адміністрацію, якщо вважаєте її поведінку неправильною</li>
-                    <li> Право оскаржити своє покарання, якщо на момент скарги не минула половина терміну покарання</li>
-                    <li> Вимагати виправлення багів і компенсацію, якщо вони принесли Вам шкоду, за наявності доказів</li>
-                </ol>
+            <div class="rule-card" onclick="openModal('rights')">
+                <span class="rule-card-title">Також ви можете/маєте:</span>
+                <span class="rule-card-desc">Ваші можливості для захисту</span>
             </div>
-        </details>
+        </div>
 
+        <p class="rules-warning">⚠️ Незнання правил не звільняє вас від віповідальності. ⚠️</p>
         <p class="rules-warning">⚠️ Правила можуть бути змінені у будь-який час без додаткових зобов'язань повідомляти. ⚠️</p>
 
     </main>
 
     <footer>
-        <p> 2022-<span id="year"></span> Prosto-Land.</p>
+        <p>© 2022-<span id="year"></span> Prosto-Land.</p>
         <p>Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.</p>
     </footer>
 
+</div>
+
+<div class="modal-overlay" id="rulesModal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle">Заголовок</div>
+            <button class="close-btn" onclick="closeModal(event)">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+        </div>
+    </div>
 </div>
 
 <script>
@@ -363,6 +463,99 @@
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('year').textContent = new Date().getFullYear();
     });
+
+    const rulesData = {
+        accounts: {
+            title: "1. Правила реєстрації та використання акаунтів",
+            desc: "Ваш акаунт — ваша відповідальність. Ці правила спрямовані на захист економіки та уникнення шахрайства.",
+            items: [
+                { text: "📛 Забороняється реєстрація акаунтів з невідповідним або образливим нікнеймом", pun: "Бан (∞)" },
+                { text: "🛑 Забороняється реєстрація акаунта з націленим заподіянням шкоди серверу чи гравцям", pun: "Бан (∞)" },
+                { text: "👥 Забороняються мультиакаунти у будь-якому прояві для отримання вигоди", pun: "Бан (∞)" },
+                { text: "🔑 Забороняється передавати свій акаунт (особливо зі статусами) стороннім особам", pun: "Бан (∞)" }
+            ]
+        },
+        chat: {
+            title: "2. Загальні правила використання чату",
+            desc: "Мета цих правил — зберегти дружню атмосферу. Сервер є місцем для відпочинку, тому агресія, спам та безпідставні конфлікти тут неприпустимі.",
+            items: [
+                { text: "🔁 Забороняється флуд, спам та відправка однакових повідомлень", pun: "Мут (від 1 год до ∞)" },
+                { text: "🤬 Забороняється кібербулінг, перехід на особистості та образи гравців", pun: "Мут (від 1 год до ∞)" },
+                { text: "🚫 Забороняється дискримінація, ворожі висловлювання та пропаганда", pun: "Мут (від 1 год до ∞)" },
+                { text: "🔥 Забороняється провокувати конфлікти або обговорювати гострі політичні та релігійні теми", pun: "Мут (від 1 год до ∞)" },
+                { text: "🤡 Забороняється неадекватна поведінка, яка заважає іншим", pun: "Мут (від 1 год до ∞)" },
+                { text: "🔗 Забороняється поширювати посилання на сторонні ресурси чи інші сервери", pun: "Мут (∞)" }
+            ]
+        },
+        gameplay: {
+            title: "3. Загальні правила поведінки на сервері",
+            desc: "Чесна гра — основа проекту. Чіти та використання недопрацювань руйнують економіку та вбивають інтерес до гри в інших учасників.",
+            items: [
+                { text: "🛠️ Забороняється отримувати перевагу над гравцями нечесним шляхом", pun: "Бан (від 3 дн до ∞)" },
+                { text: "💻 Використання сторонніх модифікацій, програм чи багів є грубим порушенням", pun: "Бан (від 3 дн до ∞)" },
+                { text: "🔞 Забороняється створювати споруди чи арти нецензурного характеру", pun: "Бан (∞)" },
+                { text: "🤫 Забороняється замовчувати інформацію про порушників, читерів чи багоюзерів", pun: "Бан (∞)" },
+                { text: "📈 Забороняється накрутка статистики нечесним шляхом", pun: "Бан (від 3 дн до 30 дн)" },
+                { text: "🤥 Забороняється вводити адміністрацію в оману, обманювати чи брехати", pun: "Бан (від 3 дн до ∞)" },
+                { text: "💥 Забороняється створювати механізми (лаг-машини), що викликають збої сервера", pun: "Бан (∞)" },
+                { text: "🧨 Забороняється гріферити інших гравців або цілеспрямовано заважати їм грати", pun: "Бан (від 30 дн до ∞)" }
+            ]
+        },
+        rights: {
+            title: "Також ви можете/маєте:",
+            desc: "Ці правила існують для вашого захисту. Вони гарантують, що адміністрація діє справедливо, а кожен гравець має право голосу.",
+            items: [
+                { text: "📝 Ви маєте право подати скаргу на адміністрацію, якщо вважаєте її дії неправомірними", pun: "" },
+                { text: "⚖️ Ви маєте право оскаржити своє покарання, якщо на момент подачі не минула половина терміну", pun: "" },
+                { text: "💰 Ви маєте право вимагати виправлення багів та компенсацію, якщо вони завдали вам шкоди (за наявності доказів)", pun: "" }
+            ]
+        }
+    };
+
+    function openModal(category) {
+        const data = rulesData[category];
+        if (!data) return;
+
+        document.getElementById('modalTitle').textContent = data.title;
+        
+        const body = document.getElementById('modalBody');
+        body.innerHTML = '';
+
+        if (data.desc) {
+            const descDiv = document.createElement('div');
+            descDiv.className = 'modal-desc';
+            descDiv.textContent = data.desc;
+            body.appendChild(descDiv);
+        }
+
+        data.items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'rule-item';
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'rule-text';
+            textDiv.textContent = item.text;
+            div.appendChild(textDiv);
+
+            if (item.pun) {
+                const punDiv = document.createElement('div');
+                punDiv.className = 'punishment';
+                punDiv.textContent = item.pun;
+                div.appendChild(punDiv);
+            }
+
+            body.appendChild(div);
+        });
+
+        document.getElementById('rulesModal').classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeModal(e) {
+        if (e) e.preventDefault();
+        document.getElementById('rulesModal').classList.remove('active');
+        document.body.style.overflow = ''; 
+    }
 </script>
 
 </body>
