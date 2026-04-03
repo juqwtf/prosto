@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosto-Land | Заробіток</title>
+    <title>Prosto-Land | Магазини</title>
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/emojis/1243186309166665758.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
@@ -15,7 +15,6 @@
             --shadow-color: rgba(0, 0, 0, 0.5);
             --highlight-color: #1fd0cd;
             --highlight-bg: rgba(31, 208, 205, 0.15);
-            --job-bg: rgba(20, 20, 20, 0.6);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,7 +41,7 @@
 
         main.container {
             width: 100%;
-            max-width: 950px; 
+            max-width: 800px; 
             background-color: var(--container-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -67,23 +66,6 @@
             gap: 12px;
         }
 
-        main h2 {
-            color: #fff;
-            font-size: 1.15em;
-            margin: 20px 0 10px 0;
-            text-align: left;
-            border-left: 3px solid var(--highlight-color);
-            padding-left: 10px;
-        }
-
-        .description {
-            font-size: 0.9em;
-            color: #bbb;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            text-align: left;
-        }
-
         code {
             display: inline-block;
             background: rgba(0, 0, 0, 0.4);
@@ -95,90 +77,50 @@
             font-size: 0.9em;
         }
 
-        .methods-grid {
+        main h1 code {
+            font-size: 0.65em;
+            font-weight: normal;
+        }
+
+        .shops-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 12px;
             text-align: left;
         }
 
-        .method-card {
+        .shop-item {
             background: rgba(255, 255, 255, 0.03);
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
-            border-top: 2px solid var(--highlight-color);
-            font-size: 0.9rem;
+            border-left: 2px solid var(--highlight-color);
+            font-size: 0.85rem;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
+            transition: transform 0.2s ease;
         }
 
-        .method-header {
+        .shop-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(3px);
+        }
+
+        .shop-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 8px;
         }
 
-        .method-title {
+        .shop-title {
             font-weight: bold;
             color: var(--highlight-color);
-            font-size: 1.05em;
-        }
-
-        .jobs-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            text-align: left;
-        }
-
-        @media (max-width: 800px) {
-            .jobs-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 500px) {
-            .jobs-grid { grid-template-columns: 1fr; }
-        }
-
-        .job-card {
-            background: var(--job-bg);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .job-card-title {
-            font-weight: bold;
-            color: #fff;
             font-size: 0.95em;
-            margin-bottom: 6px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
         }
 
-        .job-card-note {
-            font-size: 0.7em;
-            color: #aaa;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .price-list {
-            list-style: none;
-            font-size: 0.75rem;
-        }
-
-        .price-list li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-            color: #ccc;
-        }
-
-        .price-list li span:last-child {
-            color: #55ff55;
-            font-weight: bold;
-            white-space: nowrap;
-            margin-left: 5px;
+        .shop-header code {
+            font-size: 0.8em;
+            padding: 2px 6px;
         }
 
         .back-btn-container {
@@ -223,79 +165,71 @@
 
 <div class="layout-wrapper">
     <main class="container">
-        <h1>💰 Як заробляти кошти</h1>
-
-        <div class="methods-grid">
-            <div class="method-card">
-                <div class="method-header">
-                    <span class="method-title">Батл Пас</span>
-                    <code>/bp</code>
-                </div>
-                <span>Виконуйте завдання та отримуйте поінти. За підвищення рівня видаються гроші, донат-валюта.</span>
-            </div>
-
-            <div class="method-card">
-                <div class="method-header">
-                    <span class="method-title">Скупщик</span>
+        <h1>🛒 Список магазинів <code>/shop</code></h1>
+        
+        <div class="shops-grid">
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Скупщик</span>
                     <code>/seller</code>
                 </div>
-                <span>Швидкий продаж здобутих ресурсів серверу. На продаж діють ліміти, але це стабільне джерело доходу.</span>
+                <span>Швидкий продаж здобутих ресурсів, блоків та зайвого непотребу.</span>
             </div>
-
-            <div class="method-card">
-                <div class="method-header">
-                    <span class="method-title">Аукціон</span>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Інгредієнти</span>
+                    <code>/ingredients</code>
+                </div>
+                <span>Рідкісні компоненти для складного крафту та магічного зілляваріння.</span>
+            </div>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Коваль</span>
+                    <code>/koval</code>
+                </div>
+                <span>Якісні інструменти, гостра зброя та максимально надійна броня.</span>
+            </div>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Аукціон</span>
                     <code>/ah</code>
                 </div>
-                <span>Ринок гравців. Продавайте будь-що — від їжі до блоків. Ціну на свої товари ви встановлюєте самостійно.</span>
+                <span>Торговий майданчик між гравцями. Купуй та продавай найкращі речі.</span>
             </div>
-        </div>
-
-        <h2>Роботи <code>/jobs</code></h2>
-        <div class="description">
-            Щоб заробляти, відкрийте меню робіт та оберіть професію. Після цього в чаті з'явиться сповіщення про обрану професію. Під час  роботи (копання, рубка тощо) зверху буде відображатися спеціальний індикатор із вашим поточним заробітком.
-        </div>
-        
-        <div class="jobs-grid">
-            <div class="job-card">
-                <div class="job-card-title">⛏ Шахтар</div>
-                <span class="job-card-note">Заробіток за блок:</span>
-                <ul class="price-list">
-                    <li><span>Рідкісні руди:</span> <span>1.75$ - 5.00$</span></li>
-                    <li><span>Звичайні руди:</span> <span>0.25$ - 0.50$</span></li>
-                    <li><span>Глибинні/Пекло:</span> <span>0.35$ - 0.45$</span></li>
-                    <li><span>Каміння/Порода:</span> <span>0.01$</span></li>
-                </ul>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Магазин можливостей</span>
+                    <code>/commands</code>
+                </div>
+                <span>Оренда корисних унікальних команд за ігрову валюту сервера.</span>
             </div>
-
-            <div class="job-card">
-                <div class="job-card-title">🪓 Лісник</div>
-                <span class="job-card-note">Враховуються всі види:</span>
-                <ul class="price-list">
-                    <li><span>Будь-яке дерево:</span> <span>1.00$</span></li>
-                </ul>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Шахтар</span>
+                    <code>/miner</code>
+                </div>
+                <span>Корисні руди, каміння та рідкісні мінерали без спуску в шахту.</span>
             </div>
-
-            <div class="job-card">
-                <div class="job-card-title">⚔ Мисливець</div>
-                <span class="job-card-note">Тільки звичайний світ:</span>
-                <ul class="price-list">
-                    <li><span>Боси (Warden):</span> <span>20.00$</span></li>
-                    <li><span>Небезпечні:</span> <span>3.00$</span></li>
-                    <li><span>Ворожі:</span> <span>1.50$</span></li>
-                    <li><span>Тварини:</span> <span>0.50$</span></li>
-                </ul>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Фермер</span>
+                    <code>/farmer</code>
+                </div>
+                <span>Свіжа їжа, насіння та багатий врожай для швидкого відновлення сил.</span>
             </div>
-
-            <div class="job-card">
-                <div class="job-card-title">🎣 Рибак</div>
-                <span class="job-card-note">Заробіток за улов:</span>
-                <ul class="price-list">
-                    <li><span>Скарби/Книги:</span> <span>5.00$ - 15.00$</span></li>
-                    <li><span>Рідкісна риба:</span> <span>4.00$ - 6.00$</span></li>
-                    <li><span>Звичайна риба:</span> <span>2.00$ - 2.50$</span></li>
-                    <li><span>Сміття:</span> <span>1.00$</span></li>
-                </ul>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Обмінник валюти</span>
+                    <code>/exchange</code>
+                </div>
+                <span>Вигідна конвертація звичайних ігрових доларів ($) у донат-валюту (✬).</span>
+            </div>
+            <div class="shop-item">
+                <div class="shop-header">
+                    <span class="shop-title">Донат товари</span>
+                    <code>/pointshop</code>
+                </div>
+                <span>Ексклюзивні предмети та унікальні можливості за зірочки (✬).</span>
             </div>
         </div>
 
